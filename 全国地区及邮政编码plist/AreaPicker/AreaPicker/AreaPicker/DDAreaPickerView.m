@@ -13,6 +13,7 @@
 
 @interface DDAreaPickerView () {
     NSArray *provinces, *cities, *areas;
+    UIView *bgView;
 }
 
 @end
@@ -67,7 +68,7 @@
             self.locate.city = cities[0][@"name"];
         }
     }
-        
+    
     return self;
     
 }
@@ -148,6 +149,7 @@
                 
                 self.locate.state = provinces[row][@"name"];
                 self.locate.city = cities[0][@"name"];
+                self.locate.zipCode = cities[0][@"zipcode"];
                 if ([areas count] > 0) {
                     self.locate.district = areas[0];
                 } else {
@@ -200,35 +202,44 @@
     if([self.delegate respondsToSelector:@selector(pickerDidChaneStatus:)]) {
         [self.delegate pickerDidChaneStatus:self];
     }
-
 }
-
 
 #pragma mark - animation
 
 - (void)showInView:(UIView *)view {
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
+    
+    bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+    bgView.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.337];
+    [bgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelPicker)]];
+    [bgView addSubview:self];
+    [view addSubview:bgView];
+    
     self.frame = CGRectMake(0, view.frame.size.height, screenWidth, self.frame.size.height);
-    [view addSubview:self];
     
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.3 animations:^{
-        self.frame = CGRectMake(0, view.frame.size.height - self.frame.size.height, screenWidth, self.frame.size.height);
+        weakSelf.frame = CGRectMake(0, view.frame.size.height - weakSelf.frame.size.height, screenWidth, weakSelf.frame.size.height);
+    } completion:^(BOOL finished) {
+        if([weakSelf.delegate respondsToSelector:@selector(pickerDidChaneStatus:)]) {
+            [weakSelf.delegate pickerDidChaneStatus:weakSelf];
+        }
     }];
-    
 }
 
 - (void)cancelPicker {
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
-
+    
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.3
                      animations:^{
-                         self.frame = CGRectMake(0, self.frame.origin.y+self.frame.size.height, screenWidth, self.frame.size.height);
+                         weakSelf.frame = CGRectMake(0, weakSelf.frame.origin.y+weakSelf.frame.size.height, screenWidth, weakSelf.frame.size.height);
                      }
                      completion:^(BOOL finished){
-                         [self removeFromSuperview];
-                         
+                         [weakSelf removeFromSuperview];
+                         [bgView removeFromSuperview];
                      }];
-    
 }
 
 @end

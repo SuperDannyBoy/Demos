@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "DDAreaPickerView.h"
 
-@interface ViewController () <UITextFieldDelegate, DDAreaPickerDelegate, DDAreaPickerDatasource>
+@interface ViewController () <DDAreaPickerDelegate, DDAreaPickerDatasource>
 @property (strong, nonatomic) DDAreaPickerView *locatePicker;
 
 -(void)cancelLocatePicker;
