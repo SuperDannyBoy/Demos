@@ -1,0 +1,14 @@
+//
+//  PrefixHeader.pch
+//  WechatPayDemo
+//
+//  Created by SuperDanny on 15/12/7.
+//  Copyright © 2015年 SuperDanny. All rights reserved.
+//
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#endif
+
+#import "WXApiRequestHandler.h"
