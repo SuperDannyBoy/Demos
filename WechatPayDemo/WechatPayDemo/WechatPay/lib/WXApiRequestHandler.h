@@ -1,5 +1,5 @@
 //
-//  WXApiManager.h
+//  WXApiRequestHandler.h
 //  Created by SuperDanny on 15/12/7.
 //
 

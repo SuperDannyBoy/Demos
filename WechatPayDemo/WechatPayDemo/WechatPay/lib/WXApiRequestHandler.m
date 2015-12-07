@@ -1,5 +1,5 @@
 //
-//  WXApiManager.m
+//  WXApiRequestHandler.m
 //  Created by SuperDanny on 15/12/7.
 //
 
