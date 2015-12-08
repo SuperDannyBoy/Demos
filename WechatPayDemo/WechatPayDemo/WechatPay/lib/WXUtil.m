@@ -57,4 +57,19 @@
     //return [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
 }
 
++ (BOOL)isWXAppInstalled {
+    // 1.判断是否安装微信
+    if (![WXApi isWXAppInstalled]) {
+        NSLog(@"您尚未安裝微信客戶端,請先安裝后再返回支付");
+        return NO;
+    }
+    
+    // 2.判断微信的版本是否支持最新Api
+    if (![WXApi isWXAppSupportApi]) {
+        NSLog(@"您微信當前版本不支持此功能,請先升級微信應用");
+        return NO;
+    }
+    return YES;
+}
+
 @end

@@ -5,7 +5,6 @@
 
 
 #import "WXApiRequestHandler.h"
-#import "WXApi.h"
 #import "WXApiManager.h"
 //#import "MyBillDetailsViewController.h"
 

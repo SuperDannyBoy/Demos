@@ -8,6 +8,7 @@
 #import "WechatPayHeader.h"
 #import "WXUtil.h"
 #import "ApiXml.h"
+#import "WXApi.h"
 
 @interface WXApiRequestHandler : NSObject
 
