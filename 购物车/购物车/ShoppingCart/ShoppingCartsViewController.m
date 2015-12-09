@@ -82,7 +82,12 @@
         [weakSelf chooseAll:isChoose];
     }];
     [_bottomView setPayActionBlock:^{
-        
+        NSPredicate *pre = [NSPredicate predicateWithFormat:@"isSelect == 1"];
+        if ([weakSelf.dataArray filteredArrayUsingPredicate:pre].count) {
+            //进入支付界面
+        } else {
+            [SVProgressHUD showInfoWithStatus:NSLocalizedString(@"至少選擇一件商品進行支付", nil)];
+        }
     }];
     [_bottomView setDeleteActionBlock:^{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
