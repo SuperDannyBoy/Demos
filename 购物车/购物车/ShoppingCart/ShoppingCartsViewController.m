@@ -116,10 +116,18 @@
 #pragma mark - 统计总价
 - (void)statistics {
     CGFloat prices = 0;
+    //统计选中的有几项，用于判断是否全选
+    __block NSUInteger selectCount = 0;
     for (GoodsModel *model in _dataArray) {
         if (model.isSelect) {
+            selectCount++;
             prices += [model.totalPrices floatValue];
         }
+    }
+    if (selectCount == _dataArray.count) {
+        _bottomView.chooseBtn.selected = YES;
+    } else {
+        _bottomView.chooseBtn.selected = NO;
     }
     _bottomView.moneyLab.text = [NSString stringWithFormat:@"合計：$ %.2lf", prices];
 }

@@ -14,8 +14,6 @@ typedef void(^DeleteBlock)();
 
 @interface ShoppingCartBottomView ()
 
-///选择
-@property (strong, nonatomic) UIButton *chooseBtn;
 ///付款
 @property (strong, nonatomic) UIButton *payBtn;
 ///删除

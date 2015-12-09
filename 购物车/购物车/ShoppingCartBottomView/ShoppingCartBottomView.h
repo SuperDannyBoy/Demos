@@ -17,6 +17,8 @@ typedef enum : NSUInteger {
 
 @interface ShoppingCartBottomView : UIView
 
+///选择
+@property (strong, nonatomic) UIButton *chooseBtn;
 ///费用
 @property (strong, nonatomic) UILabel  *moneyLab;
 
