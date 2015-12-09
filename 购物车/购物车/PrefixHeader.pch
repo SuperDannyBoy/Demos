@@ -1,0 +1,23 @@
+//
+//  PrefixHeader.pch
+//  购物车
+//
+//  Created by SuperDanny on 15/12/8.
+//  Copyright © 2015年 SuperDanny. All rights reserved.
+//
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#endif
+
+#import <SVProgressHUD/SVProgressHUD.h>
+#import "AmountTools.h"
+
+#define WEAKSELF                        typeof(self) __weak weakSelf = self;
+
+#define KScreenHeight                   [[UIScreen mainScreen] bounds].size.height
+#define KScreenWidth                    [[UIScreen mainScreen] bounds].size.width
+
+#define RGBACOLOR(r,g,b,a)              [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
+#define RGBCOLOR(r,g,b)                 [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1.0f]
