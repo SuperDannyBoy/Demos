@@ -158,7 +158,7 @@
     
     __block GoodsModel *model = _dataArray[indexPath.row];
     
-    [cell configureCellDataWithModel:model cellType:CellTypeShoppingCart];
+    [cell configureCellDataWithModel:model cellType:CellTypeShoppingCart CanEditing:YES];
     
     [cell setChooseBlock:^(BOOL isSelect) {
         model.isSelect = isSelect;

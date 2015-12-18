@@ -20,6 +20,12 @@
 @property (nonatomic, copy) NSString *amount;
 ///总价
 @property (nonatomic, copy) NSString *totalPrices;
+///圖片
+@property (nonatomic, copy) NSString *picImage;
+///商品名稱
+@property (nonatomic, copy) NSString *name;
+///商品規格
+@property (nonatomic, copy) NSString *size;
 
 - (GoodsModel *)setModelWithData:(NSDictionary *)dic;
 

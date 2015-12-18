@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShoppingCartCell" rowHeight="77" id="KGk-i7-Jjw" customClass="ShoppingCartTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ShoppingCartCell" rowHeight="77" id="KGk-i7-Jjw" customClass="ShoppingCartTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -16,43 +16,36 @@
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNs-us-pm9">
                         <rect key="frame" x="219" y="0.5" width="101" height="76.5"/>
-                        <animations/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CHANEL项链CHANEL项链CHANEL项链CHANEL项链" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWn-e5-zTT">
-                        <rect key="frame" x="108" y="9" width="124" height="33"/>
-                        <animations/>
+                        <rect key="frame" x="104" y="9" width="128" height="33"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="产品规格：项链" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCJ-Oo-xJh">
-                        <rect key="frame" x="108" y="49" width="114" height="16"/>
-                        <animations/>
+                        <rect key="frame" x="104" y="49" width="118" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$ 556.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4uH-Pj-bYG">
-                        <rect key="frame" x="238" y="8" width="69" height="18"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$ 55096.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4uH-Pj-bYG">
+                        <rect key="frame" x="228" y="8" width="79" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$ 756.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ksK-tS-H6E">
-                        <rect key="frame" x="238" y="27" width="69" height="18"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <rect key="frame" x="228" y="23" width="79" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="流量副本" translatesAutoresizingMaskIntoConstraints="NO" id="SGh-ut-07f">
-                        <rect key="frame" x="34" y="8" width="70" height="59"/>
-                        <animations/>
+                        <rect key="frame" x="36" y="8" width="60" height="60"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Wh-KD-nA5">
                         <rect key="frame" x="228" y="46" width="23" height="23"/>
-                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                         <state key="normal" backgroundImage="shoppingSubstract">
                             <color key="titleColor" red="0.98039215690000003" green="0.84705882349999995" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -63,7 +56,6 @@
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p8S-Fq-riO">
                         <rect key="frame" x="291" y="46" width="23" height="23"/>
-                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                         <state key="normal" backgroundImage="shoppingAdd">
                             <color key="titleColor" red="0.98039215690000003" green="0.84705882349999995" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -74,7 +66,6 @@
                     </button>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="99" textAlignment="center" minimumFontSize="17" background="cellBackgroundColor" translatesAutoresizingMaskIntoConstraints="NO" id="gdb-GS-B0l">
                         <rect key="frame" x="255" y="47" width="32" height="21"/>
-                        <animations/>
                         <color key="textColor" red="0.98039215690000003" green="0.84705882349999995" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12.5"/>
                         <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
@@ -84,7 +75,6 @@
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oD5-nZ-9LZ">
                         <rect key="frame" x="0.0" y="0.0" width="34" height="77"/>
-                        <animations/>
                         <state key="normal" image="shoppingNonSelect"/>
                         <state key="selected" image="shoppingSelected"/>
                         <connections>
@@ -92,9 +82,7 @@
                         </connections>
                     </button>
                 </subviews>
-                <animations/>
             </tableViewCellContentView>
-            <animations/>
             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="CurrentPriceLab" destination="4uH-Pj-bYG" id="3Ze-Rg-h0r"/>
@@ -107,7 +95,7 @@
                 <outlet property="chooseBtn" destination="oD5-nZ-9LZ" id="SLl-eu-bcj"/>
                 <outlet property="reduceBtn" destination="5Wh-KD-nA5" id="WSh-zi-PaX"/>
             </connections>
-            <point key="canvasLocation" x="234" y="329.5"/>
+            <point key="canvasLocation" x="178" y="301.5"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -12,6 +12,7 @@
 #endif
 
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "UIImageView+WebCache.h"
 #import "AmountTools.h"
 
 #define WEAKSELF                        typeof(self) __weak weakSelf = self;

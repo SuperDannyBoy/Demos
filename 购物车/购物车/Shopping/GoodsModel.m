@@ -11,11 +11,15 @@
 @implementation GoodsModel
 
 - (GoodsModel *)setModelWithData:(NSDictionary *)dic {
+    self.name          = @"苹果开发者会员";
+    self.picImage      = @"";
+    self.size          = @"";
     self.price         = @"556.00";
     self.originalPrice = @"756.00";
     self.amount        = @"86";
     CGFloat prices     = [self.amount integerValue]*[self.price floatValue];
     self.totalPrices   = [NSString stringWithFormat:@"%.2lf", prices];
+    
     return self;
 }
 
