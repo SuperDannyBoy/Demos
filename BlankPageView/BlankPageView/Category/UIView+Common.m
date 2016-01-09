@@ -82,7 +82,7 @@ static char LoadingViewKey, BlankPageViewKey;
 - (UIView *)blankPageContainer{
     UIView *blankPageContainer = self;
     for (UIView *aView in [self subviews]) {
-        if ([aView isKindOfClass:[UITableView class]]) {
+        if ([aView isKindOfClass:[UITableView class]] || [aView isKindOfClass:[UICollectionView class]]) {
             blankPageContainer = aView;
         }
     }
