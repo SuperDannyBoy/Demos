@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:&#x4ee3;&#x7801;&#x6ce8;&#x5165;.xcodeproj">
+      location = "self:UIWebView.xcodeproj">
    </FileRef>
 </Workspace>
