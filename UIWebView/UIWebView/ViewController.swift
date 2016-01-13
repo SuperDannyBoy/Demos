@@ -23,6 +23,25 @@ class ViewController: UIViewController, UIWebViewDelegate {
         
         let fileURL = NSBundle.mainBundle().URLForResource("index", withExtension: "html")
         let request = NSURLRequest(URL: fileURL!)
+        
+        var response: NSURLResponse?
+        
+        var data: NSData?
+        
+        do {
+            data = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
+        } catch {
+            print(error)
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+        
+        print("\(response?.MIMEType)")
+        
+        // 在iOS开发中,如果不是特殊要求,所有的文本编码都是用UTF8
+        // 先用UTF8解释接收到的二进制数据流
+        webView!.loadData(data!, MIMEType: (response?.MIMEType)!, textEncodingName: "UTF8", baseURL: NSURL(string: "")!)
+        
         webView!.loadRequest(request)
     }
     
@@ -72,7 +91,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
     }
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
-        print("didFailLoadWithError")
+        print("didFailLoadWithError--->\(error?.localizedDescription)")
     }
     
     // MARK:
