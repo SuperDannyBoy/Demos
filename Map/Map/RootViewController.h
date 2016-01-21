@@ -22,6 +22,7 @@
 
 // 目的地的输入框
 @property (weak, nonatomic) IBOutlet UITextField *destinationField;
+@property (weak, nonatomic) IBOutlet UITextView *destinationTxt;
 
 /**
  *  点击之后开始画线

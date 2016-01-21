@@ -11,17 +11,22 @@
 
 @interface RootViewController () <MKMapViewDelegate, UIAlertViewDelegate, CLLocationManagerDelegate>
 {
-    ///记录自己的位置
-    CLLocationCoordinate2D _coordinate;
     ///记录选中的位置
     CLLocationCoordinate2D _selectCoordinate;
     ///记录上一次规划的路线，用于再次请求新路线清除旧路线
     NSMutableArray *_routePolylineArr;
     CLLocationManager *_locationmanager;
 }
+
+///记录自己的位置
+@property (assign, nonatomic) CLLocationCoordinate2D coordinate;
+///是否实时定位
+@property BOOL isRealTime;
+
 @end
 
 @implementation RootViewController
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -75,8 +80,8 @@
 //    [_mapView addAnnotations:arr];
 }
 
+#pragma mark - CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    
     if (
         ([_locationmanager respondsToSelector:@selector(requestWhenInUseAuthorization)] && status != kCLAuthorizationStatusNotDetermined && status != kCLAuthorizationStatusAuthorizedWhenInUse) ||
         (![_locationmanager respondsToSelector:@selector(requestWhenInUseAuthorization)] && status != kCLAuthorizationStatusNotDetermined && status != kCLAuthorizationStatusAuthorized)
@@ -107,6 +112,51 @@
     _coordinate.longitude = userLocation.location.coordinate.longitude;
     
     [self setMapRegionWithCoordinate:_coordinate];
+    
+    typeof(self) weakSelf = self;
+    CLGeocoder *clGeoCoder = [[CLGeocoder alloc] init];
+    CLGeocodeCompletionHandler handle = ^(NSArray *placemarks,NSError *error)
+    {
+        for (CLPlacemark *placeMark in placemarks)
+        {
+            NSDictionary *addressDic = placeMark.addressDictionary;
+            NSLog(@"-----%@", addressDic);
+            NSString *state       = addressDic[@"State"];
+            NSString *city        = addressDic[@"City"];
+            NSString *subLocality = addressDic[@"SubLocality"];
+            NSString *street      = addressDic[@"Street"];
+            
+            NSString *address = [NSString stringWithFormat:@"%@%@%@%@",state,city,subLocality,street];
+            NSLog(@"最后一次定位城市：%@\n地址：%@", city, address);
+            
+            //如果不是实时定位，则将最后的位置放置大头针
+            if (!weakSelf.isRealTime) {
+                //将定位到的位置放一个大头针
+                MKPointAnnotation *ann = [[MKPointAnnotation alloc] init];
+                ann.coordinate = weakSelf.coordinate;
+                [ann setTitle:NSLocalizedString(@"最后定位位置", nil)];
+                [ann setSubtitle:address];
+                //触发viewForAnnotation
+                [weakSelf.mapView addAnnotation:ann];
+            }
+        }
+        //如果只是定位一次的话，这个方法需要写上。如果是实时定位，则需要注释
+        if (!_isRealTime) {
+            [weakSelf stopLocation];
+        }
+        /*
+        这里可以设置block回调操作
+        */
+    };
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    CLLocation *newLocation = userLocation.location;
+    //根据经纬度反向地理编译出地址信息
+    [clGeoCoder reverseGeocodeLocation:newLocation completionHandler:handle];
+}
+
+- (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error {
+    [self stopLocation];
 }
 
 #pragma mark 自定义大头针
@@ -184,7 +234,7 @@
  *
  *  @return 画线的渲染
  */
-#pragma mark - 设置画线渲染
+#pragma mark 设置画线渲染
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(MKPolyline *)overlay
 {
     MKPolylineRenderer *poly = [[MKPolylineRenderer alloc] initWithPolyline:overlay];
@@ -195,13 +245,26 @@
     return poly;
 }
 
+#pragma mark - 实时定位
+- (IBAction)startLocation {
+    _isRealTime = YES;
+    _mapView.showsUserLocation = YES;
+}
+
+#pragma mark - 停止实时定位
+- (IBAction)stopLocation {
+    _isRealTime = NO;
+    _mapView.showsUserLocation = NO;
+}
+
 #pragma mark - 根据目的地地理位置规划路线
 - (IBAction)drawLine {
     // 0.退出键盘
     [self.view endEditing:YES];
     
     // 1.获取用户输入的目的地
-    NSString *destination = self.destinationField.text;
+//    NSString *destination = self.destinationField.text;
+    NSString *destination = self.destinationTxt.text;
     if (destination.length == 0) {
         return;
     }
