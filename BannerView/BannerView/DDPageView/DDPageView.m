@@ -129,6 +129,8 @@ static CGFloat ScrollTime = 5.0;
     for (int i = 0; i < imageItems.count; i++) {
 //        DDPageItem *item = imageItems[i];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * _scrollView.frame.size.width+space, space, _scrollView.frame.size.width-space*2, _scrollView.frame.size.height-2*space-size.height)];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.backgroundColor = [UIColor whiteColor];
         //加载图片
 //        imageView.backgroundColor = i%2?[UIColor redColor]:[UIColor blueColor];
         DDPageItem *item = imageItems[i];
@@ -204,8 +206,8 @@ static CGFloat ScrollTime = 5.0;
         page--;
         if (page >= _pageControl.numberOfPages) {
             page = 0;
-        } else if (page < 0) {
-            page = _pageControl.numberOfPages -1;
+        } else if (page <= 0) {
+            page = _pageControl.numberOfPages-1;
         }
     }
     if (page != _pageControl.currentPage) {

@@ -19,8 +19,8 @@
     [super viewDidLoad];
     NSArray *tempArr = @[@"http://ww1.sinaimg.cn/mw690/81f8a509gw1evdwqs4q4cj20xc0xbjyw.jpg",
                          @"http://ww1.sinaimg.cn/mw690/81f8a509gw1evdwqs4q4cj20xc0xbjyw.jpg",
-                         @"http://ww1.sinaimg.cn/mw690/81f8a509gw1evdwqs4q4cj20xc0xbjyw.jpg",
-                         @"http://ww1.sinaimg.cn/mw690/81f8a509gw1evdwqs4q4cj20xc0xbjyw.jpg"
+//                         @"http://ww1.sinaimg.cn/mw690/81f8a509gw1evdwqs4q4cj20xc0xbjyw.jpg",
+//                         @"http://ww1.sinaimg.cn/mw690/81f8a509gw1evdwqs4q4cj20xc0xbjyw.jpg"
                          ];
     NSMutableArray *itemArr = [NSMutableArray array];
     for (NSUInteger i = 0; i < tempArr.count; i++) {
