@@ -331,9 +331,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "所有字体库/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7454e855-33d4-4b8a-b245-f351d713d02e";
 			};
 			name = Debug;
 		};
@@ -341,9 +343,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: chuangqin zhou (QNET992MLP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: chuangqin zhou (QNET992MLP)";
 				INFOPLIST_FILE = "所有字体库/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7454e855-33d4-4b8a-b245-f351d713d02e";
 			};
 			name = Release;
 		};
@@ -400,6 +405,7 @@
 				1E4A8C5E1AB96226001D37BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1E4A8C5F1AB96226001D37BA /* Build configuration list for PBXNativeTarget "所有字体库Tests" */ = {
 			isa = XCConfigurationList;
@@ -408,6 +414,7 @@
 				1E4A8C611AB96226001D37BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
