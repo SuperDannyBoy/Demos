@@ -69,8 +69,10 @@ static NSString *DDPageItemsKey = @"DDPageItemsKey";
 }
 
 - (void)stopTimer {
-    [_timer invalidate];
-    _timer = nil;
+    if (_timer) {
+        [_timer invalidate];
+        _timer = nil;
+    }
 }
 
 #pragma mark - private methods
@@ -198,6 +200,11 @@ static NSString *DDPageItemsKey = @"DDPageItemsKey";
     [_scrollView setContentOffset:CGPointMake(targetX, 0) animated:animated];
 }
 #pragma mark - UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    //开始拖动scrollview的时候，停止计时器控制的跳转
+    [self stopTimer];
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     float targetX = scrollView.contentOffset.x;
     NSArray *imageItems = objc_getAssociatedObject(self, (__bridge const void *)DDPageItemsKey);
@@ -234,6 +241,10 @@ static NSString *DDPageItemsKey = @"DDPageItemsKey";
         CGFloat targetX = _scrollView.contentOffset.x + _scrollView.frame.size.width;
         targetX = (int)(targetX/ITEM_WIDTH) * ITEM_WIDTH;
         [self moveToTargetPosition:targetX];
+    }
+    //拖动完毕的时候，重新开始计时器控制跳转
+    if (!_timer && _isAutoPlay) {
+        [self createTimer];
     }
 }
 

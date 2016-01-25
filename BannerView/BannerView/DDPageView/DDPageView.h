@@ -54,7 +54,7 @@ typedef enum : NSUInteger {
          imageArray:(NSArray *)array;
 
 - (void)scrollToIndex:(int)aIndex;
-///在ViewController销毁时需要调用改方法销毁定时器，不然会导致无法释放
+///销毁定时器
 - (void)stopTimer;
 ///刷新数据
 - (void)reloadData:(NSArray *)array;
