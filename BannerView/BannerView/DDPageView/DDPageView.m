@@ -13,20 +13,20 @@
 
 @interface DDPageView () <UIGestureRecognizerDelegate, UIScrollViewDelegate>
 
-@property (nonatomic, assign) BOOL          isAutoPlay;
-@property (nonatomic, strong) UIScrollView  *scrollView;
-@property (nonatomic, strong) UIPageControl *pageControl;
-@property (nonatomic, strong) NSTimer       *timer;
+@property (nonatomic, assign) BOOL           isAutoPlay;
+@property (nonatomic, strong) UIScrollView   *scrollView;
+@property (nonatomic, strong) UIPageControl  *pageControl;
+@property (nonatomic, strong) NSTimer        *timer;
+@property (nonatomic, assign) NSTimeInterval scrollTime;
+@property (nonatomic, copy  ) NSString       *placeholderImage;
 
 @end
 
 static NSString *DDPageItemsKey = @"DDPageItemsKey";
 
-static CGFloat ScrollTime = 5.0;
-
 @implementation DDPageView
 
-- (id)initWithFrame:(CGRect)frame delegate:(id<DDPageViewDelegate>)delegate focusImageItems:(DDPageItem *)firstItem, ... {
+- (id)initWithFrame:(CGRect)frame delegate:(id<DDPageViewDelegate>)delegate timeInterval:(NSTimeInterval)time placeholderImage:(NSString *)placeholderImage focusImageItems:(DDPageItem *)firstItem, ... {
     NSMutableArray *imageItems = [NSMutableArray array];
     DDPageItem *eachItem;
     va_list argumentList;
@@ -38,21 +38,23 @@ static CGFloat ScrollTime = 5.0;
         }
         va_end(argumentList);
     }
-    return [self initWithFrame:frame delegate:delegate imageArray:imageItems isAuto:YES];
+    return [self initWithFrame:frame delegate:delegate timeInterval:time placeholderImage:placeholderImage imageArray:imageItems isAuto:time <= 0?NO:YES];
 }
 
-- (id)initWithFrame:(CGRect)frame delegate:(id<DDPageViewDelegate>)delegate imageArray:(NSArray *)array isAuto:(BOOL)isAuto {
+- (id)initWithFrame:(CGRect)frame delegate:(id<DDPageViewDelegate>)delegate timeInterval:(NSTimeInterval)time placeholderImage:(NSString *)placeholderImage imageArray:(NSArray *)array {
+    return [self initWithFrame:frame delegate:delegate timeInterval:time placeholderImage:placeholderImage imageArray:array isAuto:time <= 0?NO:YES];
+}
+
+- (id)initWithFrame:(CGRect)frame delegate:(id<DDPageViewDelegate>)delegate timeInterval:(NSTimeInterval)time placeholderImage:(NSString *)placeholderImage imageArray:(NSArray *)array isAuto:(BOOL)isAuto {
     if (self = [super initWithFrame:frame]) {
         _isAutoPlay = isAuto;
+        _placeholderImage = placeholderImage;
+        _scrollTime = time;
         [self setImageItems:array];
         [self setupViews];
         self.delegate = delegate;
     }
     return self;
-}
-
-- (id)initWithFrame:(CGRect)frame delegate:(id<DDPageViewDelegate>)delegate imageArray:(NSArray *)array {
-    return [self initWithFrame:frame delegate:delegate imageArray:array isAuto:YES];
 }
 
 - (void)dealloc {
@@ -103,7 +105,7 @@ static CGFloat ScrollTime = 5.0;
 }
 
 - (void)createTimer {
-    _timer = [NSTimer scheduledTimerWithTimeInterval:ScrollTime target:self selector:@selector(switchFocusImageItems) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:_scrollTime target:self selector:@selector(switchFocusImageItems) userInfo:nil repeats:YES];
 }
 
 - (void)setupViews {
@@ -158,7 +160,7 @@ static CGFloat ScrollTime = 5.0;
         //        imageView.backgroundColor = i%2?[UIColor redColor]:[UIColor blueColor];
         DDPageItem *item = imageItems[i];
         NSURL *url = [NSURL URLWithString:item.imageURL];
-        [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderImage1"]];
+        [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:_placeholderImage]];
         [_scrollView addSubview:imageView];
     }
     if (imageItems.count > 1) {

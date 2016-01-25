@@ -31,16 +31,15 @@
     NSArray *tempArr = @[@"http://ww1.sinaimg.cn/mw690/81f8a509gw1evdwqs4q4cj20xc0xbjyw.jpg",
                          @"http://ww4.sinaimg.cn/mw690/81f8a509jw9ezzyqfk8o9j21kw0mjae3.jpg",
                          @"http://ww1.sinaimg.cn/mw690/81f8a509gw1ezzd0fwjiej21kw0mcwj5.jpg",
-                         @"http://ww4.sinaimg.cn/mw690/81f8a509jw9ezzcyi6n8zj21kw0titig.jpg"
-                         ];
+                         @"http://ww4.sinaimg.cn/mw690/81f8a509jw9ezzcyi6n8zj21kw0titig.jpg"];
     NSMutableArray *itemArr = [NSMutableArray array];
     for (NSUInteger i = 0; i < tempArr.count; i++) {
         [itemArr addObject:kItemInfoDic(@"", tempArr[i])];
     }
     CGRect rect = CGRectMake(0, 64, CGRectGetWidth([UIScreen mainScreen].bounds), 300);
-//    _banner = [[DDPageView alloc] initWithFrame:rect delegate:self imageArray:itemArr isAuto:YES];
+//    _banner = [[DDPageView alloc] initWithFrame:rect delegate:self timeInterval:4 placeholderImage:@"placeholderImage1" imageArray:itemArr isAuto:YES];
     
-    _banner = [[DDPageView alloc] initWithFrame:rect delegate:self focusImageItems:itemArr[0],itemArr[1],itemArr[2],itemArr[3], nil];
+    _banner = [[DDPageView alloc] initWithFrame:rect delegate:self timeInterval:4 placeholderImage:@"placeholderImage1" focusImageItems:itemArr[0],itemArr[1],itemArr[2],itemArr[3], nil];
     
     
     [self.view addSubview:_banner];
