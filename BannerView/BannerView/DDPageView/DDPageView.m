@@ -27,28 +27,20 @@ static CGFloat ScrollTime = 5.0;
 @implementation DDPageView
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<DDPageViewDelegate>)delegate focusImageItems:(DDPageItem *)firstItem, ... {
-    if (self = [super initWithFrame:frame]) {
-        NSMutableArray *imageItems = [NSMutableArray array];
-        DDPageItem *eachItem;
-        va_list argumentList;
-        if (firstItem)
+    NSMutableArray *imageItems = [NSMutableArray array];
+    DDPageItem *eachItem;
+    va_list argumentList;
+    if (firstItem)
+    {
+        [imageItems addObject: firstItem];
+        va_start(argumentList, firstItem);
+        while((eachItem = va_arg(argumentList, DDPageItem *)))
         {
-            [imageItems addObject: firstItem];
-            va_start(argumentList, firstItem);
-            while((eachItem = va_arg(argumentList, DDPageItem *)))
-            {
-                [imageItems addObject: eachItem];
-            }
-            va_end(argumentList);
+            [imageItems addObject: eachItem];
         }
-        
-        objc_setAssociatedObject(self, (__bridge const void *)DDPageItemsKey, imageItems, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        _isAutoPlay = YES;
-        [self setupViews];
-        
-        self.delegate = delegate;
+        va_end(argumentList);
     }
-    return self;
+    return [self initWithFrame:frame delegate:delegate imageArray:imageItems isAuto:YES];
 }
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<DDPageViewDelegate>)delegate imageArray:(NSArray *)array isAuto:(BOOL)isAuto {

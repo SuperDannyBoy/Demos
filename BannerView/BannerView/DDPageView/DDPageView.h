@@ -35,11 +35,10 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) DDPageType pageType;
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<DDPageViewDelegate>)delegate imageArray:(NSArray *)array isAuto:(BOOL)isAuto;
-
 - (id)initWithFrame:(CGRect)frame delegate:(id<DDPageViewDelegate>)delegate focusImageItems:(DDPageItem *)items, ... NS_REQUIRES_NIL_TERMINATION;
 - (id)initWithFrame:(CGRect)frame delegate:(id<DDPageViewDelegate>)delegate imageArray:(NSArray *)array;
-- (void)scrollToIndex:(int)aIndex;
 
+- (void)scrollToIndex:(int)aIndex;
 ///在ViewController销毁时需要调用改方法销毁定时器，不然会导致无法释放
 - (void)stopTimer;
 ///刷新数据
