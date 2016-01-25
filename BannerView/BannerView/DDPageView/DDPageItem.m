@@ -23,6 +23,7 @@
         if ([dict isKindOfClass:[NSDictionary class]]) {
             self.title    = [dict objectForKey:kItemInfoKey_Title];
             self.imageURL = [dict objectForKey:kItemInfoKey_URL];
+            self.tag      = tag;
             //...
         }
     }
