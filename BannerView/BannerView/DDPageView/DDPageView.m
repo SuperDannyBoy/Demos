@@ -30,12 +30,10 @@ static CGFloat ScrollTime = 5.0;
     NSMutableArray *imageItems = [NSMutableArray array];
     DDPageItem *eachItem;
     va_list argumentList;
-    if (firstItem)
-    {
+    if (firstItem) {
         [imageItems addObject: firstItem];
         va_start(argumentList, firstItem);
-        while((eachItem = va_arg(argumentList, DDPageItem *)))
-        {
+        while ((eachItem = va_arg(argumentList, DDPageItem *))) {
             [imageItems addObject: eachItem];
         }
         va_end(argumentList);
