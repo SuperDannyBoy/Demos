@@ -1,0 +1,164 @@
+//
+//  ViewController.swift
+//  demo
+//
+//  Created by SuperDanny on 16/1/20.
+//  Copyright © 2016年 SuperDanny. All rights reserved.
+//
+
+import UIKit
+
+class ViewController: UIViewController, UIImagePickerControllerDelegate {
+
+    var lowImg: UIImageView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+//        for x in 1...100000 {
+//            if  x%1 == 0 &&
+//                x%2 == 1 &&
+//                x%3 == 0 &&
+//                x%4 == 1 &&
+//                x%5 == 4 &&
+//                x%6 == 3 &&
+//                x%7 == 0 &&
+//                x%8 == 1 &&
+//                x%9 == 0 {
+//                print(x)
+//            }
+//        }
+        
+        
+        //降质量图片
+        let da = self.resetSizeOfImageData(UIImage(named: "世界地图.jpg")!, maxSize: 30)
+        
+        let formatter = NSByteCountFormatter()
+        formatter.countStyle   = .File
+        formatter.allowedUnits = .UseKB
+        UIImagePNGRepresentation(UIImage(named: "世界地图.jpg")!)?.length
+        
+        let sourceKB = formatter.stringFromByteCount(Int64((UIImagePNGRepresentation(UIImage(named: "世界地图.jpg")!)?.length)!))
+        let lowKB = formatter.stringFromByteCount(Int64(da.length))
+        
+        print("\(sourceKB),\(lowKB)")
+        
+        let image = UIImage(data: da)
+        
+        lowImg = UIImageView(image: image)
+        lowImg.frame = CGRectMake(0, 0, 240, 320)
+        
+        self.view.addSubview(lowImg)
+        
+        //原图片
+        let imgSource = UIImageView(image: UIImage(named: "世界地图.jpg"))
+        imgSource.frame = CGRectMake(0, 330, 240, 320);
+        
+        self.view.addSubview(imgSource)
+        
+        //图片增加保存本地功能
+        let btn = UIButton(frame: CGRectMake(CGRectGetMaxX(lowImg.frame)+10, 100, 120, 40))
+        btn.addTarget(self, action: Selector("save"), forControlEvents: .TouchUpInside)
+        btn.setTitle("保存压缩图片", forState: .Normal)
+        btn.backgroundColor = UIColor.orangeColor()
+        self.view.addSubview(btn)
+    }
+    
+    // MARK: - 保存图片后到相册后，调用的相关方法，查看是否保存成功
+    private func imageWasSavedSuccessfully(paramImage: UIImage, didFinishSavingWithError paramError: NSError?, contextInfo paramContextInfo: UnsafeMutablePointer<Void>) {
+        if paramError == nil {
+            print("Image was saved successfully.")
+        } else {
+            print("An error happened while saving the image.Error = \(paramError)")
+        }
+    }
+    
+    // MARK: - 保存到相册
+    private func save() {
+        // 保存图片到相册中
+        let selectorToCall = Selector("imageWasSavedSuccessfully:didFinishSavingWithError:contextInfo:")
+        UIImageWriteToSavedPhotosAlbum(lowImg.image!, self, selectorToCall, nil)
+    }
+    
+    // MARK: - 降低质量
+    func resetSizeOfImageData(source_image: UIImage, maxSize: Int) -> NSData {
+        //先调整分辨率
+        var newSize = CGSizeMake(source_image.size.width, source_image.size.height)
+        
+        let tempHeight = newSize.height / 1024
+        let tempWidth  = newSize.width / 1024
+        
+        if tempWidth > 1.0 && tempWidth > tempHeight {
+            newSize = CGSizeMake(source_image.size.width / tempWidth, source_image.size.height / tempWidth)
+        }
+        else if tempHeight > 1.0 && tempWidth < tempHeight {
+            newSize = CGSizeMake(source_image.size.width / tempHeight, source_image.size.height / tempHeight)
+        }
+        
+        UIGraphicsBeginImageContext(newSize)
+        source_image.drawAsPatternInRect(CGRectMake(0,0,newSize.width,newSize.height))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        //先判断当前质量是否满足要求，不满足再进行压缩
+        var finallImageData = UIImageJPEGRepresentation(newImage,1.0)
+        let sizeOrigin      = Int64((finallImageData?.length)!)
+        let sizeOriginKB    = Int(sizeOrigin / 1024)
+        if sizeOriginKB <= maxSize {
+            return finallImageData!
+        }
+        
+        //保存压缩系数
+        let compressionQualityArr = NSMutableArray()
+        let avg = CGFloat(1.0/250)
+        var value = avg
+        
+        for var i = 250; i>=1; i-- {
+            value = CGFloat(i)*avg
+            compressionQualityArr.addObject(value)
+        }
+        
+        //调整大小
+        //说明：压缩系数数组compressionQualityArr是从大到小存储。
+        //思路：折半计算，如果中间压缩系数仍然降不到目标值maxSize，则从后半部分开始寻找压缩系数；反之从前半部分寻找压缩系数
+        finallImageData = UIImageJPEGRepresentation(newImage, CGFloat(compressionQualityArr[125] as! NSNumber))
+        if Int(Int64((UIImageJPEGRepresentation(newImage, CGFloat(compressionQualityArr[125] as! NSNumber))?.length)!)/1024) > maxSize {
+            //从后半部分开始
+            for idx in 126..<250 {
+                let value = compressionQualityArr[idx]
+                let sizeOrigin   = Int64((finallImageData?.length)!)
+                let sizeOriginKB = Int(sizeOrigin / 1024)
+                print("当前降到的质量：\(sizeOriginKB)")
+                if sizeOriginKB > maxSize {
+                    print("\(idx)----\(value)")
+                    finallImageData = UIImageJPEGRepresentation(newImage, CGFloat(value as! NSNumber))
+                } else {
+                    break
+                }
+            }
+        } else {
+            //从前半部分开始
+            for idx in 0..<125 {
+                let value = compressionQualityArr[idx]
+                let sizeOrigin   = Int64((finallImageData?.length)!)
+                let sizeOriginKB = Int(sizeOrigin / 1024)
+                print("当前降到的质量：\(sizeOriginKB)")
+                if sizeOriginKB > maxSize {
+                    print("\(idx)----\(value)")
+                    finallImageData = UIImageJPEGRepresentation(newImage, CGFloat(value as! NSNumber))
+                } else {
+                    break
+                }
+            }
+        }
+        return finallImageData!
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+
+}
+
