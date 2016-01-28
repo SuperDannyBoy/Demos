@@ -81,27 +81,65 @@
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
+    //先判断当前质量是否满足要求，不满足再进行压缩
+    __block NSData *finallImageData = UIImageJPEGRepresentation(newImage,1.0);
+    NSUInteger sizeOrigin   = finallImageData.length;
+    NSUInteger sizeOriginKB = sizeOrigin / 1024;
     
+    if (sizeOriginKB <= maxSize) {
+        return finallImageData;
+    }
+    
+    //保存压缩系数
     NSMutableArray *compressionQualityArr = [NSMutableArray array];
-    CGFloat avg = 1.0/250;
+    CGFloat avg   = 1.0/250;
     CGFloat value = avg;
     for (int i = 250; i >= 1; i--) {
         value = i*avg;
         [compressionQualityArr addObject:@(value)];
     }
     //调整大小
-    __block NSData *finallImageData = UIImageJPEGRepresentation(newImage,1.0);
-    [compressionQualityArr enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSUInteger sizeOrigin = [finallImageData length];
-        NSUInteger sizeOriginKB = [[NSByteCountFormatter stringFromByteCount:sizeOrigin countStyle:NSByteCountFormatterCountStyleBinary] integerValue];
-        NSLog(@"当前降到的质量：%ld", sizeOriginKB);
-        if (sizeOriginKB > maxSize) {
-            NSLog(@"%ld----%lf", idx, [obj floatValue]);
-            finallImageData = UIImageJPEGRepresentation(newImage,[obj floatValue]);
-        } else {
-            *stop = YES;
+    //说明：压缩系数数组compressionQualityArr是从大到小存储。
+    //思路：折半计算，如果中间压缩系数仍然降不到目标值maxSize，则从后半部分开始寻找压缩系数；反之从前半部分寻找压缩系数
+    if (UIImageJPEGRepresentation(newImage,[compressionQualityArr[125] floatValue]).length/1024 > maxSize) {
+        //从后半部分开始
+        for (int idx = 126; idx < 250; idx++) {
+            NSUInteger sizeOrigin = finallImageData.length;
+            NSUInteger sizeOriginKB = sizeOrigin / 1024;
+            NSLog(@"当前降到的质量：%ld", (unsigned long)sizeOriginKB);
+            if (sizeOriginKB > maxSize) {
+                NSLog(@"%d----%lf", idx, [compressionQualityArr[idx] floatValue]);
+                finallImageData = UIImageJPEGRepresentation(newImage,[compressionQualityArr[idx] floatValue]);
+            } else {
+                break;
+            }
         }
-    }];
+    } else {
+        //从前半部分开始
+        for (int idx = 0; idx < 125; idx++) {
+            NSUInteger sizeOrigin = finallImageData.length;
+            NSUInteger sizeOriginKB = sizeOrigin / 1024;
+            NSLog(@"当前降到的质量：%ld", (unsigned long)sizeOriginKB);
+            if (sizeOriginKB > maxSize) {
+                NSLog(@"%d----%lf", idx, [compressionQualityArr[idx] floatValue]);
+                finallImageData = UIImageJPEGRepresentation(newImage,[compressionQualityArr[idx] floatValue]);
+            } else {
+                break;
+            }
+        }
+    }
+    
+//    [compressionQualityArr enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        NSUInteger sizeOrigin = finallImageData.length;
+//        NSUInteger sizeOriginKB = sizeOrigin / 1024;
+//        NSLog(@"当前降到的质量：%ld", (unsigned long)sizeOriginKB);
+//        if (sizeOriginKB > maxSize) {
+//            NSLog(@"%ld----%lf", (unsigned long)idx, [obj floatValue]);
+//            finallImageData = UIImageJPEGRepresentation(newImage,[obj floatValue]);
+//        } else {
+//            *stop = YES;
+//        }
+//    }];
     return finallImageData;
 }
 
