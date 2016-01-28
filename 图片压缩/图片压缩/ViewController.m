@@ -8,7 +8,9 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <UIImagePickerControllerDelegate>
+
+@property (nonatomic, strong) UIImageView *lowImg;
 
 @end
 
@@ -16,7 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    //降质量图片
     NSData *da = [self resetSizeOfImageData:[UIImage imageNamed:@"IMG_0509.jpg"] maxSize:30];
     NSByteCountFormatter *f = [[NSByteCountFormatter alloc] init];
     f.countStyle = NSByteCountFormatterCountStyleFile;
@@ -24,22 +27,43 @@
     NSLog(@"%@,%@",[f stringFromByteCount:UIImagePNGRepresentation([UIImage imageNamed:@"IMG_0509.jpg"]).length], [f stringFromByteCount:da.length]);
     UIImage *ima = [UIImage imageWithData:da];
     
-    UIImageView *img = [[UIImageView alloc] initWithImage:ima];
-    img.frame = CGRectMake(0, 0, 240, 320);
+    _lowImg = [[UIImageView alloc] initWithImage:ima];
+    _lowImg.frame = CGRectMake(0, 0, 240, 320);
     
-    [self.view addSubview:img];
+    [self.view addSubview:_lowImg];
     
+    //原图片
     UIImageView *imgSource = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"IMG_0509.jpg"]];
     imgSource.frame = CGRectMake(0, 330, 240, 320);
     
     [self.view addSubview:imgSource];
     
-    [UIColor colorWithRed:0.443 green:0.549 blue:0.000 alpha:1.000];
-    
+    //图片增加保存本地功能
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_lowImg.frame)+10, 100, 120, 40)];
+    [btn addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
+    [btn setTitle:@"保存压缩图片" forState:UIControlStateNormal];
+    btn.backgroundColor = [UIColor orangeColor];
+    [self.view addSubview:btn];
 }
 
-- (NSData *)resetSizeOfImageData:(UIImage *)source_image maxSize:(NSInteger)maxSize
-{
+- (void)save {
+    // 保存图片到相册中
+    SEL selectorToCall = @selector(imageWasSavedSuccessfully:didFinishSavingWithError:contextInfo:);
+    UIImageWriteToSavedPhotosAlbum(_lowImg.image, self, selectorToCall, NULL);
+}
+
+#pragma mark - UIImagePickerControllerDelegate 代理方法
+// 保存图片后到相册后，调用的相关方法，查看是否保存成功
+- (void)imageWasSavedSuccessfully:(UIImage *)paramImage didFinishSavingWithError:(NSError *)paramError contextInfo:(void *)paramContextInfo{
+    if (paramError == nil){
+        NSLog(@"Image was saved successfully.");
+    } else {
+        NSLog(@"An error happened while saving the image.");
+        NSLog(@"Error = %@", paramError);
+    }
+}
+
+- (NSData *)resetSizeOfImageData:(UIImage *)source_image maxSize:(NSInteger)maxSize {
     //先调整分辨率
     CGSize newSize = CGSizeMake(source_image.size.width, source_image.size.height);
     
@@ -58,16 +82,28 @@
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    //调整大小
-    NSData *imageData = UIImageJPEGRepresentation(newImage,1.0);
-    NSUInteger sizeOrigin = [imageData length];
-    NSUInteger sizeOriginKB = sizeOrigin / 1024;
-    if (sizeOriginKB > maxSize) {
-        NSData *finallImageData = UIImageJPEGRepresentation(newImage,0.50);
-        return finallImageData;
-    }
     
-    return imageData;
+    NSMutableArray *compressionQualityArr = [NSMutableArray array];
+    CGFloat avg = 1.0/250;
+    CGFloat value = avg;
+    for (int i = 250; i >= 1; i--) {
+        value = i*avg;
+        [compressionQualityArr addObject:@(value)];
+    }
+    //调整大小
+    __block NSData *finallImageData = UIImageJPEGRepresentation(newImage,1.0);
+    [compressionQualityArr enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSUInteger sizeOrigin = [finallImageData length];
+        NSUInteger sizeOriginKB = [[NSByteCountFormatter stringFromByteCount:sizeOrigin countStyle:NSByteCountFormatterCountStyleBinary] integerValue];
+        NSLog(@"当前降到的质量：%ld", sizeOriginKB);
+        if (sizeOriginKB > maxSize) {
+            NSLog(@"%ld----%lf", idx, [obj floatValue]);
+            finallImageData = UIImageJPEGRepresentation(newImage,[obj floatValue]);
+        } else {
+            *stop = YES;
+        }
+    }];
+    return finallImageData;
 }
 
 #pragma mark -
