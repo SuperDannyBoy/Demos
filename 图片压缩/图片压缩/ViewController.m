@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface ViewController () <UIImagePickerControllerDelegate>
+@interface ViewController ()
 
 @property (nonatomic, strong) UIImageView *lowImg;
 
@@ -52,8 +52,7 @@
     UIImageWriteToSavedPhotosAlbum(_lowImg.image, self, selectorToCall, NULL);
 }
 
-#pragma mark - UIImagePickerControllerDelegate 代理方法
-// 保存图片后到相册后，调用的相关方法，查看是否保存成功
+//保存图片后到相册后，调用的相关方法，查看是否保存成功
 - (void)imageWasSavedSuccessfully:(UIImage *)paramImage didFinishSavingWithError:(NSError *)paramError contextInfo:(void *)paramContextInfo{
     if (paramError == nil){
         NSLog(@"Image was saved successfully.");
