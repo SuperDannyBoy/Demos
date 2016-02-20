@@ -75,6 +75,12 @@ static NSString *DDPageItemsKey = @"DDPageItemsKey";
     }
 }
 
+- (void)setPageBackgroundColor:(UIColor *)pageBackgroundColor {
+    if (pageBackgroundColor) {
+        _scrollView.backgroundColor = pageBackgroundColor;
+    }
+}
+
 #pragma mark - private methods
 - (void)setImageItems:(NSArray *)array {
     NSUInteger length = [array count];
@@ -157,12 +163,14 @@ static NSString *DDPageItemsKey = @"DDPageItemsKey";
         //        DDPageItem *item = imageItems[i];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * _scrollView.frame.size.width+space, space, _scrollView.frame.size.width-space*2, _scrollView.frame.size.height-2*space-size.height)];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
-        imageView.backgroundColor = [UIColor whiteColor];
         //加载图片
         //        imageView.backgroundColor = i%2?[UIColor redColor]:[UIColor blueColor];
         DDPageItem *item = imageItems[i];
         NSURL *url = [NSURL URLWithString:item.imageURL];
-        [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:_placeholderImage]];
+        NSLog(@"%@", url);
+        [imageView sd_setImageWithURL:url
+                     placeholderImage:[UIImage imageNamed:_placeholderImage]
+                              options:SDWebImageRefreshCached];
         [_scrollView addSubview:imageView];
     }
     if (imageItems.count > 1) {

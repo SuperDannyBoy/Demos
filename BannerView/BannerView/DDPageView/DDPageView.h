@@ -60,6 +60,8 @@ typedef enum : NSUInteger {
 - (void)reloadData:(NSArray *)array;
 
 @property (nonatomic, assign) id<DDPageViewDelegate> delegate;
+///轮播图背景颜色
+@property (nonatomic, strong) UIColor *pageBackgroundColor;
 
 @end
 
