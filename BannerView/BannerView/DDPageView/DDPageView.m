@@ -109,7 +109,10 @@ static NSString *DDPageItemsKey = @"DDPageItemsKey";
     if (_timer) {
         [self stopTimer];
     }
-    [self createTimer];
+    //当轮播图数量大于1时才启动定时器播放
+    if (array.count > 1) {
+        [self createTimer];
+    }
 }
 
 - (void)createTimer {
