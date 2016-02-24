@@ -15,20 +15,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-//        for x in 1...100000 {
-//            if  x%1 == 0 &&
-//                x%2 == 1 &&
-//                x%3 == 0 &&
-//                x%4 == 1 &&
-//                x%5 == 4 &&
-//                x%6 == 3 &&
-//                x%7 == 0 &&
-//                x%8 == 1 &&
-//                x%9 == 0 {
-//                print(x)
-//            }
-//        }
-        
         
         //降质量图片
         let da = self.resetSizeOfImageData(UIImage(named: "世界地图.jpg")!, maxSize: 30)
@@ -46,18 +32,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate {
         let image = UIImage(data: da)
         
         lowImg = UIImageView(image: image)
-        lowImg.frame = CGRectMake(0, 0, 240, 320)
+        lowImg.frame = CGRect(x: 0, y: 0, width: 240, height: 320)
         
         self.view.addSubview(lowImg)
         
         //原图片
         let imgSource = UIImageView(image: UIImage(named: "世界地图.jpg"))
-        imgSource.frame = CGRectMake(0, 330, 240, 320);
+        imgSource.frame = CGRect(x: 0, y: 330, width: 240, height: 320)
         
         self.view.addSubview(imgSource)
         
         //图片增加保存本地功能
-        let btn = UIButton(frame: CGRectMake(CGRectGetMaxX(lowImg.frame)+10, 100, 120, 40))
+        let btn = UIButton(frame: CGRect(x: lowImg.frame.maxX+10, y: 100, width: 120, height: 40))
         btn.addTarget(self, action: Selector("save"), forControlEvents: .TouchUpInside)
         btn.setTitle("保存压缩图片", forState: .Normal)
         btn.backgroundColor = UIColor.orangeColor()
@@ -83,20 +69,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate {
     // MARK: - 降低质量
     func resetSizeOfImageData(source_image: UIImage, maxSize: Int) -> NSData {
         //先调整分辨率
-        var newSize = CGSizeMake(source_image.size.width, source_image.size.height)
+        var newSize = CGSize(width: source_image.size.width, height: source_image.size.height)
         
         let tempHeight = newSize.height / 1024
         let tempWidth  = newSize.width / 1024
         
         if tempWidth > 1.0 && tempWidth > tempHeight {
-            newSize = CGSizeMake(source_image.size.width / tempWidth, source_image.size.height / tempWidth)
+            newSize = CGSize(width: source_image.size.width / tempWidth, height: source_image.size.height / tempWidth)
         }
         else if tempHeight > 1.0 && tempWidth < tempHeight {
-            newSize = CGSizeMake(source_image.size.width / tempHeight, source_image.size.height / tempHeight)
+            newSize = CGSize(width: source_image.size.width / tempHeight, height: source_image.size.height / tempHeight)
         }
         
         UIGraphicsBeginImageContext(newSize)
-        source_image.drawAsPatternInRect(CGRectMake(0,0,newSize.width,newSize.height))
+        source_image.drawAsPatternInRect(CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
