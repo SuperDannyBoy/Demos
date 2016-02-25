@@ -81,6 +81,11 @@ static NSString *DDPageItemsKey = @"DDPageItemsKey";
     }
 }
 
+- (void)setPageType:(DDPageType)pageType {
+    _pageType = pageType;
+    [self setupViews];
+}
+
 #pragma mark - private methods
 - (void)setImageItems:(NSArray *)array {
     NSUInteger length = [array count];
@@ -162,6 +167,7 @@ static NSString *DDPageItemsKey = @"DDPageItemsKey";
     tapGestureRecognize.numberOfTapsRequired = 1;
     [_scrollView addGestureRecognizer:tapGestureRecognize];
     
+    
     for (int i = 0; i < imageItems.count; i++) {
         //        DDPageItem *item = imageItems[i];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * _scrollView.frame.size.width+space, space, _scrollView.frame.size.width-space*2, _scrollView.frame.size.height-2*space-size.height)];
@@ -174,6 +180,14 @@ static NSString *DDPageItemsKey = @"DDPageItemsKey";
         [imageView sd_setImageWithURL:url
                      placeholderImage:[UIImage imageNamed:_placeholderImage]
                               options:SDWebImageRefreshCached];
+        if (_pageType == DDPageTypeTitle) {
+            UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(imageView.frame)-21, CGRectGetWidth(imageView.frame), 21)];
+            titleLab.text = item.title;
+            titleLab.textColor = [UIColor whiteColor];
+            titleLab.numberOfLines = 1;
+            titleLab.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.236];
+            [imageView addSubview:titleLab];
+        }
         [_scrollView addSubview:imageView];
     }
     if (imageItems.count > 1) {
@@ -229,7 +243,7 @@ static NSString *DDPageItemsKey = @"DDPageItemsKey";
             [_scrollView setContentOffset:CGPointMake(targetX, 0) animated:NO];
         }
     }
-    int page = (_scrollView.contentOffset.x+ITEM_WIDTH/2.0) / ITEM_WIDTH;
+    NSInteger page = (_scrollView.contentOffset.x+ITEM_WIDTH/2.0) / ITEM_WIDTH;
     //    NSLog(@"%f %d",_scrollView.contentOffset.x,page);
     if (imageItems.count > 1) {
         page--;
@@ -259,7 +273,7 @@ static NSString *DDPageItemsKey = @"DDPageItemsKey";
     }
 }
 
-- (void)scrollToIndex:(int)aIndex {
+- (void)scrollToIndex:(NSInteger)aIndex {
     NSArray *imageItems = objc_getAssociatedObject(self, (__bridge const void *)DDPageItemsKey);
     if (imageItems.count > 1) {
         if (aIndex >= (imageItems.count-2)) {

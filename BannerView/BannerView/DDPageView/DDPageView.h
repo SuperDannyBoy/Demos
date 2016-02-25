@@ -9,14 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "DDPageItem.h"
 
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSUInteger, DDPageType) {
     ///默认类型
     DDPageTypeDefault,
-    ///点
+    ///显示点
     DDPageTypeDot,
-    ///显示数量
+    ///显示数量(页码)
     DDPageTypeNumber,
-} DDPageType;
+    ///显示标题
+    DDPageTypeTitle,
+};
 
 @class DDPageView;
 
@@ -24,8 +26,8 @@ typedef enum : NSUInteger {
 @protocol DDPageViewDelegate <NSObject>
 
 @optional
-- (void)foucusView:(DDPageView *)pageView didSelectItem:(DDPageItem *)item index:(int)index;
-- (void)foucusView:(DDPageView *)pageView currentItem:(int)index;
+- (void)foucusView:(DDPageView *)pageView didSelectItem:(DDPageItem *)item index:(NSInteger)index;
+- (void)foucusView:(DDPageView *)pageView currentItem:(NSInteger)index;
 
 @end
 
@@ -53,7 +55,7 @@ typedef enum : NSUInteger {
    placeholderImage:(NSString *)placeholderImage
          imageArray:(NSArray *)array;
 
-- (void)scrollToIndex:(int)aIndex;
+- (void)scrollToIndex:(NSInteger)aIndex;
 ///销毁定时器
 - (void)stopTimer;
 ///刷新数据

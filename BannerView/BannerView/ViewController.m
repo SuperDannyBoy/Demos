@@ -64,11 +64,11 @@
 }
 
 - (void)foucusView:(DDPageView *)pageView didSelectItem:(DDPageItem *)item index:(NSInteger)index {
-    NSLog(@"%@----点击第%d张图---url:%@", pageView, index, item.imageURL);
+    NSLog(@"%@----点击第%ld张图---url:%@", pageView, (long)index, item.imageURL);
 }
 
 - (void)foucusView:(DDPageView *)pageView currentItem:(NSInteger)index {
-    NSLog(@"%@----第%d张图", pageView, index);
+    NSLog(@"%@----第%ld张图", pageView, (long)index);
 }
 
 - (void)didReceiveMemoryWarning {
