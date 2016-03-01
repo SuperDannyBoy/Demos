@@ -102,6 +102,83 @@
     }
 }
 
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
+    
+    CGFloat componentWidth = 0.0;
+    CGFloat width = CGRectGetWidth(self.frame);
+    
+    //5:3:2
+    //5:5
+    
+    if (self.pickerStyle == DDAreaPickerWithStateAndCityAndDistrict) {
+        if (component == 0) {
+            componentWidth = 4/10.0*width; // 第一个组键的宽度
+        }
+        else if (component == 1) {
+            componentWidth = 3/10.0*width; // 第2个组键的宽度
+        }
+        else {
+            componentWidth = 3/10.0*width; // 第3个组键的宽度
+        }
+    } else {
+        if (component == 0) {
+            componentWidth = 5/10.0*width; // 第1个组键的宽度
+        }
+        else {
+            componentWidth = 5/10.0*width; // 第2个组键的宽度
+        }
+    }
+    return componentWidth;
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+    
+    UILabel *myView = nil;
+    
+    CGFloat width = CGRectGetWidth(self.frame);
+    //是否是两列
+    BOOL haveTwoComponent = self.pickerStyle == DDAreaPickerWithStateAndCity;
+    
+    if (component == 0) {
+        
+        myView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, haveTwoComponent ? 4/10.0*width : 5/10.0*width, 30)];
+        
+        myView.textAlignment = NSTextAlignmentCenter;
+        
+        myView.text = provinces[row][@"name"];
+        
+        myView.font = [UIFont systemFontOfSize:haveTwoComponent ? 16 : 14];         //用label来设置字体大小
+        
+        myView.backgroundColor = [UIColor clearColor];
+        
+    }
+    else if (component == 1) {
+        
+        myView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, haveTwoComponent ? 3/10.0*width : 5/10.0*width, 30)];
+        
+        myView.text = cities[row][@"name"];
+        
+        myView.textAlignment = NSTextAlignmentCenter;
+        
+        myView.font = [UIFont systemFontOfSize:haveTwoComponent ? 16 : 14];
+        
+        myView.backgroundColor = [UIColor clearColor];
+    }
+    else {
+        myView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 3/10.0*width, 30)];
+        
+        myView.text = areas[row];
+        
+        myView.textAlignment = NSTextAlignmentCenter;
+        
+        myView.font = [UIFont systemFontOfSize:13];
+        
+        myView.backgroundColor = [UIColor clearColor];
+    }
+    
+    return myView;
+}
+
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if (self.pickerStyle == DDAreaPickerWithStateAndCityAndDistrict) {
         switch (component) {

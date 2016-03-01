@@ -144,7 +144,7 @@
 						<string>海港区</string>
 						<string>山海关区</string>
 						<string>北戴河区</string>
-						<string>青龙满族自治县</string>
+						<string>青龙满族县</string>
 						<string>昌黎县</string>
 						<string>抚宁县</string>
 						<string>卢龙县</string>
@@ -286,9 +286,9 @@
 						<string>平泉县</string>
 						<string>滦平县</string>
 						<string>隆化县</string>
-						<string>丰宁满族自治县</string>
-						<string>宽城满族自治县</string>
-						<string>围场满族蒙古族自治县</string>
+						<string>丰宁满族县</string>
+						<string>宽城满族县</string>
+						<string>围场满族蒙古族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -310,7 +310,7 @@
 						<string>南皮县</string>
 						<string>吴桥县</string>
 						<string>献县</string>
-						<string>孟村回族自治县</string>
+						<string>孟村回族县</string>
 						<string>泊头市</string>
 						<string>任丘市</string>
 						<string>黄骅市</string>
@@ -332,7 +332,7 @@
 						<string>香河县</string>
 						<string>大城县</string>
 						<string>文安县</string>
-						<string>大厂回族自治县</string>
+						<string>大厂回族县</string>
 						<string>霸州市</string>
 						<string>三河市</string>
 						<string>其他区</string>
@@ -885,7 +885,7 @@
 						<string>立山区</string>
 						<string>千山区</string>
 						<string>台安县</string>
-						<string>岫岩满族自治县</string>
+						<string>岫岩满族县</string>
 						<string>海城市</string>
 						<string>其他区</string>
 					</array>
@@ -902,8 +902,8 @@
 						<string>望花区</string>
 						<string>顺城区</string>
 						<string>抚顺县</string>
-						<string>新宾满族自治县</string>
-						<string>清原满族自治县</string>
+						<string>新宾满族县</string>
+						<string>清原满族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -918,8 +918,8 @@
 						<string>溪湖区</string>
 						<string>明山区</string>
 						<string>南芬区</string>
-						<string>本溪满族自治县</string>
-						<string>桓仁满族自治县</string>
+						<string>本溪满族县</string>
+						<string>桓仁满族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -933,7 +933,7 @@
 						<string>元宝区</string>
 						<string>振兴区</string>
 						<string>振安区</string>
-						<string>宽甸满族自治县</string>
+						<string>宽甸满族县</string>
 						<string>东港市</string>
 						<string>凤城市</string>
 						<string>其他区</string>
@@ -984,7 +984,7 @@
 						<string>太平区</string>
 						<string>清河门区</string>
 						<string>细河区</string>
-						<string>阜新蒙古族自治县</string>
+						<string>阜新蒙古族县</string>
 						<string>彰武县</string>
 						<string>其他区</string>
 					</array>
@@ -1048,7 +1048,7 @@
 						<string>龙城区</string>
 						<string>朝阳县</string>
 						<string>建平县</string>
-						<string>喀喇沁左翼蒙古族自治县</string>
+						<string>喀喇沁左翼蒙古族县</string>
 						<string>北票市</string>
 						<string>凌源市</string>
 						<string>其他区</string>
@@ -1126,7 +1126,7 @@
 						<string>铁西区</string>
 						<string>铁东区</string>
 						<string>梨树县</string>
-						<string>伊通满族自治县</string>
+						<string>伊通满族县</string>
 						<string>公主岭市</string>
 						<string>双辽市</string>
 						<string>其他区</string>
@@ -1173,7 +1173,7 @@
 						<string>八道江区</string>
 						<string>抚松县</string>
 						<string>靖宇县</string>
-						<string>长白朝鲜族自治县</string>
+						<string>长白朝鲜族县</string>
 						<string>江源县</string>
 						<string>临江市</string>
 						<string>其他区</string>
@@ -1187,7 +1187,7 @@
 					<key>sub</key>
 					<array>
 						<string>宁江区</string>
-						<string>前郭尔罗斯蒙古族自治县</string>
+						<string>前郭尔罗斯蒙古族县</string>
 						<string>长岭县</string>
 						<string>乾安县</string>
 						<string>扶余县</string>
@@ -1213,7 +1213,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>延边朝鲜族自治州</string>
+					<string>延边朝鲜族州</string>
 					<key>sub</key>
 					<array>
 						<string>延吉市</string>
@@ -1359,7 +1359,7 @@
 						<string>肇州县</string>
 						<string>肇源县</string>
 						<string>林甸县</string>
-						<string>杜尔伯特蒙古族自治县</string>
+						<string>杜尔伯特蒙古族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -1975,7 +1975,7 @@
 						<string>松阳县</string>
 						<string>云和县</string>
 						<string>庆元县</string>
-						<string>景宁畲族自治县</string>
+						<string>景宁畲族县</string>
 						<string>龙泉市</string>
 						<string>其他区</string>
 					</array>
@@ -3393,8 +3393,8 @@
 						<string>远安县</string>
 						<string>兴山县</string>
 						<string>秭归县</string>
-						<string>长阳土家族自治县</string>
-						<string>五峰土家族自治县</string>
+						<string>长阳土家族县</string>
+						<string>五峰土家族县</string>
 						<string>宜都市</string>
 						<string>当阳市</string>
 						<string>枝江市</string>
@@ -3535,7 +3535,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>恩施土家族苗族自治州</string>
+					<string>恩施土家族苗族州</string>
 					<key>sub</key>
 					<array>
 						<string>恩施市</string>
@@ -3662,7 +3662,7 @@
 						<string>洞口县</string>
 						<string>绥宁县</string>
 						<string>新宁县</string>
-						<string>城步苗族自治县</string>
+						<string>城步苗族县</string>
 						<string>武冈市</string>
 						<string>其他区</string>
 					</array>
@@ -3773,7 +3773,7 @@
 						<string>宁远县</string>
 						<string>蓝山县</string>
 						<string>新田县</string>
-						<string>江华瑶族自治县</string>
+						<string>江华瑶族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -3790,11 +3790,11 @@
 						<string>辰溪县</string>
 						<string>溆浦县</string>
 						<string>会同县</string>
-						<string>麻阳苗族自治县</string>
-						<string>新晃侗族自治县</string>
-						<string>芷江侗族自治县</string>
-						<string>靖州苗族侗族自治县</string>
-						<string>通道侗族自治县</string>
+						<string>麻阳苗族县</string>
+						<string>新晃侗族县</string>
+						<string>芷江侗族县</string>
+						<string>靖州苗族侗族县</string>
+						<string>通道侗族县</string>
 						<string>洪江市</string>
 						<string>其他区</string>
 					</array>
@@ -3818,7 +3818,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>湘西土家族苗族自治州</string>
+					<string>湘西土家族苗族州</string>
 					<key>sub</key>
 					<array>
 						<string>吉首市</string>
@@ -3874,7 +3874,7 @@
 						<string>始兴县</string>
 						<string>仁化县</string>
 						<string>翁源县</string>
-						<string>乳源瑶族自治县</string>
+						<string>乳源瑶族县</string>
 						<string>新丰县</string>
 						<string>乐昌市</string>
 						<string>南雄市</string>
@@ -4099,8 +4099,8 @@
 						<string>清城区</string>
 						<string>佛冈县</string>
 						<string>阳山县</string>
-						<string>连山壮族瑶族自治县</string>
-						<string>连南瑶族自治县</string>
+						<string>连山壮族瑶族县</string>
+						<string>连南瑶族县</string>
 						<string>清新县</string>
 						<string>英德市</string>
 						<string>连州市</string>
@@ -4214,8 +4214,8 @@
 						<string>柳城县</string>
 						<string>鹿寨县</string>
 						<string>融安县</string>
-						<string>融水苗族自治县</string>
-						<string>三江侗族自治县</string>
+						<string>融水苗族县</string>
+						<string>三江侗族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -4238,11 +4238,11 @@
 						<string>兴安县</string>
 						<string>永福县</string>
 						<string>灌阳县</string>
-						<string>龙胜各族自治县</string>
+						<string>龙胜各族县</string>
 						<string>资源县</string>
 						<string>平乐县</string>
 						<string>荔蒲县</string>
-						<string>恭城瑶族自治县</string>
+						<string>恭城瑶族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -4354,7 +4354,7 @@
 						<string>乐业县</string>
 						<string>田林县</string>
 						<string>西林县</string>
-						<string>隆林各族自治县</string>
+						<string>隆林各族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -4368,7 +4368,7 @@
 						<string>八步区</string>
 						<string>昭平县</string>
 						<string>钟山县</string>
-						<string>富川瑶族自治县</string>
+						<string>富川瑶族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -4384,11 +4384,11 @@
 						<string>天峨县</string>
 						<string>凤山县</string>
 						<string>东兰县</string>
-						<string>罗城仫佬族自治县</string>
-						<string>环江毛南族自治县</string>
-						<string>巴马瑶族自治县</string>
-						<string>都安瑶族自治县</string>
-						<string>大化瑶族自治县</string>
+						<string>罗城仫佬族县</string>
+						<string>环江毛南族县</string>
+						<string>巴马瑶族县</string>
+						<string>都安瑶族县</string>
+						<string>大化瑶族县</string>
 						<string>宜州市</string>
 						<string>其他区</string>
 					</array>
@@ -4404,7 +4404,7 @@
 						<string>忻城县</string>
 						<string>象州县</string>
 						<string>武宣县</string>
-						<string>金秀瑶族自治县</string>
+						<string>金秀瑶族县</string>
 						<string>合山市</string>
 						<string>其他区</string>
 					</array>
@@ -4464,12 +4464,12 @@
 						<string>屯昌县</string>
 						<string>澄迈县</string>
 						<string>临高县</string>
-						<string>白沙黎族自治县</string>
-						<string>昌江黎族自治县</string>
-						<string>乐东黎族自治县</string>
-						<string>陵水黎族自治县</string>
-						<string>保亭黎族苗族自治县</string>
-						<string>琼中黎族苗族自治县</string>
+						<string>白沙黎族县</string>
+						<string>昌江黎族县</string>
+						<string>乐东黎族县</string>
+						<string>陵水黎族县</string>
+						<string>保亭黎族苗族县</string>
+						<string>琼中黎族苗族县</string>
 						<string>西沙群岛</string>
 						<string>南沙群岛</string>
 						<string>中沙群岛的岛礁及其海域</string>
@@ -4522,10 +4522,10 @@
 						<string>奉节县</string>
 						<string>巫山县</string>
 						<string>巫溪县</string>
-						<string>石柱土家族自治县</string>
-						<string>秀山土家族苗族自治县</string>
-						<string>酉阳土家族苗族自治县</string>
-						<string>彭水苗族土家族自治县</string>
+						<string>石柱土家族县</string>
+						<string>秀山土家族苗族县</string>
+						<string>酉阳土家族苗族县</string>
+						<string>彭水苗族土家族县</string>
 						<string>江津市</string>
 						<string>合川市</string>
 						<string>永川市</string>
@@ -4646,7 +4646,7 @@
 						<string>盐亭县</string>
 						<string>安县</string>
 						<string>梓潼县</string>
-						<string>北川羌族自治县</string>
+						<string>北川羌族县</string>
 						<string>平武县</string>
 						<string>江油市</string>
 						<string>其他区</string>
@@ -4714,8 +4714,8 @@
 						<string>井研县</string>
 						<string>夹江县</string>
 						<string>沐川县</string>
-						<string>峨边彝族自治县</string>
-						<string>马边彝族自治县</string>
+						<string>峨边彝族县</string>
+						<string>马边彝族县</string>
 						<string>峨眉山市</string>
 						<string>其他区</string>
 					</array>
@@ -4857,7 +4857,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>阿坝藏族羌族自治州</string>
+					<string>阿坝藏族羌族州</string>
 					<key>sub</key>
 					<array>
 						<string>汶川县</string>
@@ -4880,7 +4880,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>甘孜藏族自治州</string>
+					<string>甘孜藏族州</string>
 					<key>sub</key>
 					<array>
 						<string>康定县</string>
@@ -4908,11 +4908,11 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>凉山彝族自治州</string>
+					<string>凉山彝族州</string>
 					<key>sub</key>
 					<array>
 						<string>西昌市</string>
-						<string>木里藏族自治县</string>
+						<string>木里藏族县</string>
 						<string>盐源县</string>
 						<string>德昌县</string>
 						<string>会理县</string>
@@ -4985,8 +4985,8 @@
 						<string>桐梓县</string>
 						<string>绥阳县</string>
 						<string>正安县</string>
-						<string>道真仡佬族苗族自治县</string>
-						<string>务川仡佬族苗族自治县</string>
+						<string>道真仡佬族苗族县</string>
+						<string>务川仡佬族苗族县</string>
 						<string>凤冈县</string>
 						<string>湄潭县</string>
 						<string>余庆县</string>
@@ -5006,9 +5006,9 @@
 						<string>西秀区</string>
 						<string>平坝县</string>
 						<string>普定县</string>
-						<string>镇宁布依族苗族自治县</string>
-						<string>关岭布依族苗族自治县</string>
-						<string>紫云苗族布依族自治县</string>
+						<string>镇宁布依族苗族县</string>
+						<string>关岭布依族苗族县</string>
+						<string>紫云苗族布依族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -5021,13 +5021,13 @@
 					<array>
 						<string>铜仁市</string>
 						<string>江口县</string>
-						<string>玉屏侗族自治县</string>
+						<string>玉屏侗族县</string>
 						<string>石阡县</string>
 						<string>思南县</string>
-						<string>印江土家族苗族自治县</string>
+						<string>印江土家族苗族县</string>
 						<string>德江县</string>
-						<string>沿河土家族自治县</string>
-						<string>松桃苗族自治县</string>
+						<string>沿河土家族县</string>
+						<string>松桃苗族县</string>
 						<string>万山特区</string>
 						<string>其他区</string>
 					</array>
@@ -5036,7 +5036,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>黔西南布依族苗族自治州</string>
+					<string>黔西南布依族苗族州</string>
 					<key>sub</key>
 					<array>
 						<string>兴义市</string>
@@ -5063,7 +5063,7 @@
 						<string>金沙县</string>
 						<string>织金县</string>
 						<string>纳雍县</string>
-						<string>威宁彝族回族苗族自治县</string>
+						<string>威宁彝族回族苗族县</string>
 						<string>赫章县</string>
 						<string>其他区</string>
 					</array>
@@ -5072,7 +5072,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>黔东南苗族侗族自治州</string>
+					<string>黔东南苗族侗族州</string>
 					<key>sub</key>
 					<array>
 						<string>凯里市</string>
@@ -5098,7 +5098,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>黔南布依族苗族自治州</string>
+					<string>黔南布依族苗族州</string>
 					<key>sub</key>
 					<array>
 						<string>都匀市</string>
@@ -5112,7 +5112,7 @@
 						<string>长顺县</string>
 						<string>龙里县</string>
 						<string>惠水县</string>
-						<string>三都水族自治县</string>
+						<string>三都水族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -5139,10 +5139,10 @@
 						<string>晋宁县</string>
 						<string>富民县</string>
 						<string>宜良县</string>
-						<string>石林彝族自治县</string>
+						<string>石林彝族县</string>
 						<string>嵩明县</string>
-						<string>禄劝彝族苗族自治县</string>
-						<string>寻甸回族彝族自治县</string>
+						<string>禄劝彝族苗族县</string>
+						<string>寻甸回族彝族县</string>
 						<string>安宁市</string>
 						<string>其他区</string>
 					</array>
@@ -5179,9 +5179,9 @@
 						<string>通海县</string>
 						<string>华宁县</string>
 						<string>易门县</string>
-						<string>峨山彝族自治县</string>
-						<string>新平彝族傣族自治县</string>
-						<string>元江哈尼族彝族傣族自治县</string>
+						<string>峨山彝族县</string>
+						<string>新平彝族傣族县</string>
+						<string>元江哈尼族彝族傣族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -5229,10 +5229,10 @@
 					<key>sub</key>
 					<array>
 						<string>古城区</string>
-						<string>玉龙纳西族自治县</string>
+						<string>玉龙纳西族县</string>
 						<string>永胜县</string>
 						<string>华坪县</string>
-						<string>宁蒗彝族自治县</string>
+						<string>宁蒗彝族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -5244,15 +5244,15 @@
 					<key>sub</key>
 					<array>
 						<string>翠云区</string>
-						<string>普洱哈尼族彝族自治县</string>
-						<string>墨江哈尼族自治县</string>
-						<string>景东彝族自治县</string>
-						<string>景谷傣族彝族自治县</string>
-						<string>镇沅彝族哈尼族拉祜族自治县</string>
-						<string>江城哈尼族彝族自治县</string>
-						<string>孟连傣族拉祜族佤族自治县</string>
-						<string>澜沧拉祜族自治县</string>
-						<string>西盟佤族自治县</string>
+						<string>普洱哈尼族彝族县</string>
+						<string>墨江哈尼族县</string>
+						<string>景东彝族县</string>
+						<string>景谷傣族彝族县</string>
+						<string>镇沅彝族哈尼族拉祜族县</string>
+						<string>江城哈尼族彝族县</string>
+						<string>孟连傣族拉祜族佤族县</string>
+						<string>澜沧拉祜族县</string>
+						<string>西盟佤族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -5268,9 +5268,9 @@
 						<string>云县</string>
 						<string>永德县</string>
 						<string>镇康县</string>
-						<string>双江拉祜族佤族布朗族傣族自治县</string>
-						<string>耿马傣族佤族自治县</string>
-						<string>沧源佤族自治县</string>
+						<string>双江拉祜族佤族布朗族傣族县</string>
+						<string>耿马傣族佤族县</string>
+						<string>沧源佤族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -5278,7 +5278,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>楚雄彝族自治州</string>
+					<string>楚雄彝族州</string>
 					<key>sub</key>
 					<array>
 						<string>楚雄市</string>
@@ -5298,22 +5298,22 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>红河哈尼族彝族自治州</string>
+					<string>红河哈尼族彝族州</string>
 					<key>sub</key>
 					<array>
 						<string>个旧市</string>
 						<string>开远市</string>
 						<string>蒙自县</string>
-						<string>屏边苗族自治县</string>
+						<string>屏边苗族县</string>
 						<string>建水县</string>
 						<string>石屏县</string>
 						<string>弥勒县</string>
 						<string>泸西县</string>
 						<string>元阳县</string>
 						<string>红河县</string>
-						<string>金平苗族瑶族傣族自治县</string>
+						<string>金平苗族瑶族傣族县</string>
 						<string>绿春县</string>
-						<string>河口瑶族自治县</string>
+						<string>河口瑶族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -5321,7 +5321,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>文山壮族苗族自治州</string>
+					<string>文山壮族苗族州</string>
 					<key>sub</key>
 					<array>
 						<string>文山县</string>
@@ -5339,7 +5339,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>西双版纳傣族自治州</string>
+					<string>西双版纳傣族州</string>
 					<key>sub</key>
 					<array>
 						<string>景洪市</string>
@@ -5352,16 +5352,16 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>大理白族自治州</string>
+					<string>大理白族州</string>
 					<key>sub</key>
 					<array>
 						<string>大理市</string>
-						<string>漾濞彝族自治县</string>
+						<string>漾濞彝族县</string>
 						<string>祥云县</string>
 						<string>宾川县</string>
 						<string>弥渡县</string>
-						<string>南涧彝族自治县</string>
-						<string>巍山彝族回族自治县</string>
+						<string>南涧彝族县</string>
+						<string>巍山彝族回族县</string>
 						<string>永平县</string>
 						<string>云龙县</string>
 						<string>洱源县</string>
@@ -5374,7 +5374,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>德宏傣族景颇族自治州</string>
+					<string>德宏傣族景颇族州</string>
 					<key>sub</key>
 					<array>
 						<string>瑞丽市</string>
@@ -5389,13 +5389,13 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>怒江傈僳族自治州</string>
+					<string>怒江傈僳族州</string>
 					<key>sub</key>
 					<array>
 						<string>泸水县</string>
 						<string>福贡县</string>
-						<string>贡山独龙族怒族自治县</string>
-						<string>兰坪白族普米族自治县</string>
+						<string>贡山独龙族怒族县</string>
+						<string>兰坪白族普米族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -5403,12 +5403,12 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>迪庆藏族自治州</string>
+					<string>迪庆藏族州</string>
 					<key>sub</key>
 					<array>
 						<string>香格里拉县</string>
 						<string>德钦县</string>
-						<string>维西傈僳族自治县</string>
+						<string>维西傈僳族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -5851,7 +5851,7 @@
 						<string>秦安县</string>
 						<string>甘谷县</string>
 						<string>武山县</string>
-						<string>张家川回族自治县</string>
+						<string>张家川回族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -5865,7 +5865,7 @@
 						<string>凉州区</string>
 						<string>民勤县</string>
 						<string>古浪县</string>
-						<string>天祝藏族自治县</string>
+						<string>天祝藏族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -5877,7 +5877,7 @@
 					<key>sub</key>
 					<array>
 						<string>甘州区</string>
-						<string>肃南裕固族自治县</string>
+						<string>肃南裕固族县</string>
 						<string>民乐县</string>
 						<string>临泽县</string>
 						<string>高台县</string>
@@ -5912,8 +5912,8 @@
 						<string>肃州区</string>
 						<string>金塔县</string>
 						<string>安西县</string>
-						<string>肃北蒙古族自治县</string>
-						<string>阿克塞哈萨克族自治县</string>
+						<string>肃北蒙古族县</string>
+						<string>阿克塞哈萨克族县</string>
 						<string>玉门市</string>
 						<string>敦煌市</string>
 						<string>其他区</string>
@@ -5977,7 +5977,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>临夏回族自治州</string>
+					<string>临夏回族州</string>
 					<key>sub</key>
 					<array>
 						<string>临夏市</string>
@@ -5986,8 +5986,8 @@
 						<string>永靖县</string>
 						<string>广河县</string>
 						<string>和政县</string>
-						<string>东乡族自治县</string>
-						<string>积石山保安族东乡族撒拉族自治县</string>
+						<string>东乡族县</string>
+						<string>积石山保安族东乡族撒拉族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -5995,7 +5995,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>甘南藏族自治州</string>
+					<string>甘南藏族州</string>
 					<key>sub</key>
 					<array>
 						<string>合作市</string>
@@ -6027,7 +6027,7 @@
 						<string>城中区</string>
 						<string>城西区</string>
 						<string>城北区</string>
-						<string>大通回族土族自治县</string>
+						<string>大通回族土族县</string>
 						<string>湟中县</string>
 						<string>湟源县</string>
 						<string>其他区</string>
@@ -6041,11 +6041,11 @@
 					<key>sub</key>
 					<array>
 						<string>平安县</string>
-						<string>民和回族土族自治县</string>
+						<string>民和回族土族县</string>
 						<string>乐都县</string>
-						<string>互助土族自治县</string>
-						<string>化隆回族自治县</string>
-						<string>循化撒拉族自治县</string>
+						<string>互助土族县</string>
+						<string>化隆回族县</string>
+						<string>循化撒拉族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -6053,10 +6053,10 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>海北藏族自治州</string>
+					<string>海北藏族州</string>
 					<key>sub</key>
 					<array>
-						<string>门源回族自治县</string>
+						<string>门源回族县</string>
 						<string>祁连县</string>
 						<string>海晏县</string>
 						<string>刚察县</string>
@@ -6067,13 +6067,13 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>黄南藏族自治州</string>
+					<string>黄南藏族州</string>
 					<key>sub</key>
 					<array>
 						<string>同仁县</string>
 						<string>尖扎县</string>
 						<string>泽库县</string>
-						<string>河南蒙古族自治县</string>
+						<string>河南蒙古族县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -6081,7 +6081,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>海南藏族自治州</string>
+					<string>海南藏族州</string>
 					<key>sub</key>
 					<array>
 						<string>共和县</string>
@@ -6096,7 +6096,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>果洛藏族自治州</string>
+					<string>果洛藏族州</string>
 					<key>sub</key>
 					<array>
 						<string>玛沁县</string>
@@ -6112,7 +6112,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>玉树藏族自治州</string>
+					<string>玉树藏族州</string>
 					<key>sub</key>
 					<array>
 						<string>玉树县</string>
@@ -6128,7 +6128,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>海西蒙古族藏族自治州</string>
+					<string>海西蒙古族藏族州</string>
 					<key>sub</key>
 					<array>
 						<string>格尔木市</string>
@@ -6277,7 +6277,7 @@
 					<key>sub</key>
 					<array>
 						<string>哈密市</string>
-						<string>巴里坤哈萨克自治县</string>
+						<string>巴里坤哈萨克县</string>
 						<string>伊吾县</string>
 						<string>其他区</string>
 					</array>
@@ -6286,7 +6286,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>昌吉回族自治州</string>
+					<string>昌吉州</string>
 					<key>sub</key>
 					<array>
 						<string>昌吉市</string>
@@ -6296,7 +6296,7 @@
 						<string>玛纳斯县</string>
 						<string>奇台县</string>
 						<string>吉木萨尔县</string>
-						<string>木垒哈萨克自治县</string>
+						<string>木垒哈萨克县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -6304,7 +6304,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>博尔塔拉蒙古自治州</string>
+					<string>博尔塔拉蒙古州</string>
 					<key>sub</key>
 					<array>
 						<string>博乐市</string>
@@ -6317,7 +6317,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>巴音郭楞蒙古自治州</string>
+					<string>巴音郭楞蒙古州</string>
 					<key>sub</key>
 					<array>
 						<string>库尔勒市</string>
@@ -6325,7 +6325,7 @@
 						<string>尉犁县</string>
 						<string>若羌县</string>
 						<string>且末县</string>
-						<string>焉耆回族自治县</string>
+						<string>焉耆回族县</string>
 						<string>和静县</string>
 						<string>和硕县</string>
 						<string>博湖县</string>
@@ -6355,7 +6355,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>克孜勒苏柯尔克孜自治州</string>
+					<string>克孜勒苏州</string>
 					<key>sub</key>
 					<array>
 						<string>阿图什市</string>
@@ -6383,7 +6383,7 @@
 						<string>岳普湖县</string>
 						<string>伽师县</string>
 						<string>巴楚县</string>
-						<string>塔什库尔干塔吉克自治县</string>
+						<string>塔什库尔干塔吉克县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
@@ -6409,13 +6409,13 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>伊犁哈萨克自治州</string>
+					<string>伊犁哈萨克州</string>
 					<key>sub</key>
 					<array>
 						<string>伊宁市</string>
 						<string>奎屯市</string>
 						<string>伊宁县</string>
-						<string>察布查尔锡伯自治县</string>
+						<string>察布查尔锡伯县</string>
 						<string>霍城县</string>
 						<string>巩留县</string>
 						<string>新源县</string>
@@ -6438,7 +6438,7 @@
 						<string>沙湾县</string>
 						<string>托里县</string>
 						<string>裕民县</string>
-						<string>和布克赛尔蒙古自治县</string>
+						<string>和布克赛尔蒙古县</string>
 						<string>其他区</string>
 					</array>
 					<key>zipcode</key>
