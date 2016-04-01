@@ -13,6 +13,7 @@
 		DF09ABA71BF7474400688696 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF09ABA51BF7474400688696 /* Main.storyboard */; };
 		DF09ABA91BF7474400688696 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF09ABA81BF7474400688696 /* Assets.xcassets */; };
 		DF09ABAC1BF7474400688696 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF09ABAA1BF7474400688696 /* LaunchScreen.storyboard */; };
+		DFA5D3111CAE9A4C00142408 /* DDGifLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = DFA5D3101CAE9A4C00142408 /* DDGifLoadingView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		DF09ABA81BF7474400688696 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DF09ABAB1BF7474400688696 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DF09ABAD1BF7474400688696 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DFA5D30F1CAE9A4C00142408 /* DDGifLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGifLoadingView.h; sourceTree = "<group>"; };
+		DFA5D3101CAE9A4C00142408 /* DDGifLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGifLoadingView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,7 @@
 		DF09AB9B1BF7474400688696 /* DDGifLoadingView */ = {
 			isa = PBXGroup;
 			children = (
+				DFA5D30E1CAE9A3C00142408 /* DDGifLoadingView */,
 				DF09AB9F1BF7474400688696 /* AppDelegate.h */,
 				DF09ABA01BF7474400688696 /* AppDelegate.m */,
 				DF09ABA21BF7474400688696 /* ViewController.h */,
@@ -77,6 +81,15 @@
 				DF09AB9D1BF7474400688696 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DFA5D30E1CAE9A3C00142408 /* DDGifLoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				DFA5D30F1CAE9A4C00142408 /* DDGifLoadingView.h */,
+				DFA5D3101CAE9A4C00142408 /* DDGifLoadingView.m */,
+			);
+			path = DDGifLoadingView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFA5D3111CAE9A4C00142408 /* DDGifLoadingView.m in Sources */,
 				DF09ABA41BF7474400688696 /* ViewController.m in Sources */,
 				DF09ABA11BF7474400688696 /* AppDelegate.m in Sources */,
 				DF09AB9E1BF7474400688696 /* main.m in Sources */,
@@ -300,6 +314,7 @@
 				DF09ABB21BF7474400688696 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
