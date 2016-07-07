@@ -105,27 +105,24 @@
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
     
     CGFloat componentWidth = 0.0;
-    CGFloat width = CGRectGetWidth(self.frame);
-    
-    //5:3:2
-    //5:5
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
     
     if (self.pickerStyle == DDAreaPickerWithStateAndCityAndDistrict) {
         if (component == 0) {
-            componentWidth = 4/10.0*width; // 第一个组键的宽度
+            componentWidth = width/3.0; // 第1个组键的宽度
         }
         else if (component == 1) {
-            componentWidth = 3/10.0*width; // 第2个组键的宽度
+            componentWidth = width/3.0; // 第2个组键的宽度
         }
         else {
-            componentWidth = 3/10.0*width; // 第3个组键的宽度
+            componentWidth = width/3.0; // 第3个组键的宽度
         }
     } else {
         if (component == 0) {
-            componentWidth = 5/10.0*width; // 第1个组键的宽度
+            componentWidth = width/2.0; // 第1个组键的宽度
         }
         else {
-            componentWidth = 5/10.0*width; // 第2个组键的宽度
+            componentWidth = width/2.0; // 第2个组键的宽度
         }
     }
     return componentWidth;
@@ -135,45 +132,46 @@
     
     UILabel *myView = nil;
     
-    CGFloat width = CGRectGetWidth(self.frame);
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    
     //是否是两列
-    BOOL haveTwoComponent = self.pickerStyle == DDAreaPickerWithStateAndCity;
+    BOOL haveTwoComponent = (self.pickerStyle == DDAreaPickerWithStateAndCity);
     
     if (component == 0) {
         
-        myView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, haveTwoComponent ? 4/10.0*width : 5/10.0*width, 30)];
+        myView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, haveTwoComponent ? width/2.0 : width/3.0, 35)];
         
         myView.textAlignment = NSTextAlignmentCenter;
         
-        myView.text = provinces[row][@"name"];
+        myView.text = [NSString stringWithFormat:@"%@", provinces[row][@"name"]];
         
         myView.font = [UIFont systemFontOfSize:haveTwoComponent ? 16 : 14];         //用label来设置字体大小
         
-        myView.backgroundColor = [UIColor clearColor];
+        //        myView.backgroundColor = [UIColor yellowColor];
         
     }
     else if (component == 1) {
         
-        myView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, haveTwoComponent ? 3/10.0*width : 5/10.0*width, 30)];
+        myView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, haveTwoComponent ? width/2.0 : width/3.0, 35)];
         
-        myView.text = cities[row][@"name"];
+        myView.text = [NSString stringWithFormat:@"%@", cities[row][@"name"]];
         
         myView.textAlignment = NSTextAlignmentCenter;
         
         myView.font = [UIFont systemFontOfSize:haveTwoComponent ? 16 : 14];
         
-        myView.backgroundColor = [UIColor clearColor];
+        //        myView.backgroundColor = [UIColor orangeColor];
     }
     else {
-        myView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 3/10.0*width, 30)];
+        myView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, width/3.0, 35)];
         
-        myView.text = areas[row];
+        myView.text = [NSString stringWithFormat:@"%@", areas[row]];
         
         myView.textAlignment = NSTextAlignmentCenter;
         
-        myView.font = [UIFont systemFontOfSize:13];
+        myView.font = [UIFont systemFontOfSize:14];
         
-        myView.backgroundColor = [UIColor clearColor];
+        //        myView.backgroundColor = [UIColor lightGrayColor];
     }
     
     return myView;
@@ -276,9 +274,9 @@
         }
     }
     
-    if([self.delegate respondsToSelector:@selector(pickerDidChaneStatus:)]) {
-        [self.delegate pickerDidChaneStatus:self];
-    }
+    //    if([self.delegate respondsToSelector:@selector(pickerDidChaneStatus:)]) {
+    //        [self.delegate pickerDidChaneStatus:self];
+    //    }
 }
 
 #pragma mark - animation
@@ -299,13 +297,20 @@
     [UIView animateWithDuration:0.3 animations:^{
         weakSelf.frame = CGRectMake(0, view.frame.size.height - weakSelf.frame.size.height, screenWidth, weakSelf.frame.size.height);
     } completion:^(BOOL finished) {
-        if([weakSelf.delegate respondsToSelector:@selector(pickerDidChaneStatus:)]) {
-            [weakSelf.delegate pickerDidChaneStatus:weakSelf];
-        }
+        //        if([weakSelf.delegate respondsToSelector:@selector(pickerDidChaneStatus:)]) {
+        //            [weakSelf.delegate pickerDidChaneStatus:weakSelf];
+        //        }
     }];
 }
 
-- (void)cancelPicker {
+- (IBAction)selectArea {
+    if([self.delegate respondsToSelector:@selector(pickerDidChaneStatus:)]) {
+        [self.delegate pickerDidChaneStatus:self];
+    }
+    [self cancelPicker];
+}
+
+- (IBAction)cancelPicker {
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
     
     __weak typeof(self) weakSelf = self;
