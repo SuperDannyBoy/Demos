@@ -102,6 +102,10 @@
     //说明：压缩系数数组compressionQualityArr是从大到小存储。
     //思路：折半计算，如果中间压缩系数仍然降不到目标值maxSize，则从后半部分开始寻找压缩系数；反之从前半部分寻找压缩系数
     if (UIImageJPEGRepresentation(newImage,[compressionQualityArr[125] floatValue]).length/1024 > maxSize) {
+        
+        //拿到最初的大小
+        finallImageData = UIImageJPEGRepresentation(newImage, 1.0);
+        
         //从后半部分开始
         for (int idx = 126; idx < 250; idx++) {
             NSUInteger sizeOrigin = finallImageData.length;
@@ -115,6 +119,10 @@
             }
         }
     } else {
+        
+        //拿到最初的大小
+        finallImageData = UIImageJPEGRepresentation(newImage, 1.0);
+        
         //从前半部分开始
         for (int idx = 0; idx < 125; idx++) {
             NSUInteger sizeOrigin = finallImageData.length;
