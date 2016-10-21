@@ -17,19 +17,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         //降质量图片
-        let da = self.resetSizeOfImageData(UIImage(named: "世界地图.jpg")!, maxSize: 200)
+        let da = self.resetSizeOfImageData(source_image: UIImage(named: "世界地图.jpg")!, maxSize: 200)
         
-        let formatter = NSByteCountFormatter()
-        formatter.countStyle   = .File
-        formatter.allowedUnits = .UseKB
-        UIImagePNGRepresentation(UIImage(named: "世界地图.jpg")!)?.length
+        let formatter = ByteCountFormatter()
+        formatter.countStyle   = .file
+        formatter.allowedUnits = .useKB
         
-        let sourceKB = formatter.stringFromByteCount(Int64((UIImagePNGRepresentation(UIImage(named: "世界地图.jpg")!)?.length)!))
-        let lowKB = formatter.stringFromByteCount(Int64(da.length))
+        let sourceKB = formatter.string(fromByteCount: Int64((UIImagePNGRepresentation(UIImage(named: "世界地图.jpg")!)?.count)!))
+        let lowKB = formatter.string(fromByteCount: Int64(da.length))
         
         print("\(sourceKB),\(lowKB)")
         
-        let image = UIImage(data: da)
+        let image = UIImage(data: da as Data)
         
         lowImg = UIImageView(image: image)
         lowImg.frame = CGRect(x: 0, y: 0, width: 240, height: 320)
@@ -44,14 +43,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate {
         
         //图片增加保存本地功能
         let btn = UIButton(frame: CGRect(x: lowImg.frame.maxX+10, y: 100, width: 120, height: 40))
-        btn.addTarget(self, action: Selector("save"), forControlEvents: .TouchUpInside)
-        btn.setTitle("保存压缩图片", forState: .Normal)
-        btn.backgroundColor = UIColor.orangeColor()
+        btn.addTarget(self, action: #selector(save), for: .touchUpInside)
+        btn.setTitle("保存压缩图片", for: .normal)
+        btn.backgroundColor = UIColor.orange
         self.view.addSubview(btn)
     }
     
     // MARK: - 保存图片后到相册后，调用的相关方法，查看是否保存成功
-    private func imageWasSavedSuccessfully(paramImage: UIImage, didFinishSavingWithError paramError: NSError?, contextInfo paramContextInfo: UnsafeMutablePointer<Void>) {
+    @objc private func imageWasSavedSuccessfully(paramImage: UIImage, didFinishSavingWithError paramError: NSError?, contextInfo paramContextInfo: UnsafeMutableRawPointer) {
         if paramError == nil {
             print("Image was saved successfully.")
         } else {
@@ -60,9 +59,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate {
     }
     
     // MARK: - 保存到相册
-    private func save() {
+    @objc private func save() {
         // 保存图片到相册中
-        let selectorToCall = Selector("imageWasSavedSuccessfully:didFinishSavingWithError:contextInfo:")
+        let selectorToCall = #selector(imageWasSavedSuccessfully(paramImage:didFinishSavingWithError:contextInfo:))
+//            Selector("imageWasSavedSuccessfully:didFinishSavingWithError:contextInfo:")
         UIImageWriteToSavedPhotosAlbum(lowImg.image!, self, selectorToCall, nil)
     }
     
@@ -82,16 +82,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate {
         }
         
         UIGraphicsBeginImageContext(newSize)
-        source_image.drawAsPatternInRect(CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        source_image.drawAsPattern(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         //先判断当前质量是否满足要求，不满足再进行压缩
-        var finallImageData = UIImageJPEGRepresentation(newImage,1.0)
-        let sizeOrigin      = Int64((finallImageData?.length)!)
+        var finallImageData = UIImageJPEGRepresentation(newImage!,1.0)
+        let sizeOrigin      = Int64((finallImageData?.count)!)
         let sizeOriginKB    = Int(sizeOrigin / 1024)
         if sizeOriginKB <= maxSize {
-            return finallImageData!
+            return finallImageData! as NSData
         }
         
         //保存压缩系数
@@ -99,51 +99,58 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate {
         let avg = CGFloat(1.0/250)
         var value = avg
         
-        for var i = 250; i>=1; i-- {
+//        for var i = 250; i>=1; i-- {
+//            value = CGFloat(i)*avg
+//            compressionQualityArr.add(value)
+//        }
+        var i = 250
+        repeat {
+            i -= 1
             value = CGFloat(i)*avg
-            compressionQualityArr.addObject(value)
-        }
+            compressionQualityArr.add(value)
+        } while i >= 1
+
         
         //调整大小
         //说明：压缩系数数组compressionQualityArr是从大到小存储。
         //思路：折半计算，如果中间压缩系数仍然降不到目标值maxSize，则从后半部分开始寻找压缩系数；反之从前半部分寻找压缩系数
-        finallImageData = UIImageJPEGRepresentation(newImage, CGFloat(compressionQualityArr[125] as! NSNumber))
-        if Int(Int64((UIImageJPEGRepresentation(newImage, CGFloat(compressionQualityArr[125] as! NSNumber))?.length)!)/1024) > maxSize {
+        finallImageData = UIImageJPEGRepresentation(newImage!, CGFloat(compressionQualityArr[125] as! NSNumber))
+        if Int(Int64((UIImageJPEGRepresentation(newImage!, CGFloat(compressionQualityArr[125] as! NSNumber))?.count)!)/1024) > maxSize {
             
             //拿到最初的大小
-            finallImageData = UIImageJPEGRepresentation(newImage, 1.0)
+            finallImageData = UIImageJPEGRepresentation(newImage!, 1.0)
             
             //从后半部分开始
             for idx in 126..<250 {
                 let value = compressionQualityArr[idx]
-                let sizeOrigin   = Int64((finallImageData?.length)!)
+                let sizeOrigin   = Int64((finallImageData?.count)!)
                 let sizeOriginKB = Int(sizeOrigin / 1024)
                 print("后半部分当前降到的质量：\(sizeOriginKB)")
                 if sizeOriginKB > maxSize {
                     print("\(idx)----\(value)")
-                    finallImageData = UIImageJPEGRepresentation(newImage, CGFloat(value as! NSNumber))
+                    finallImageData = UIImageJPEGRepresentation(newImage!, CGFloat(value as! NSNumber))
                 } else {
                     break
                 }
             }
         } else {
             //拿到最初的大小
-            finallImageData = UIImageJPEGRepresentation(newImage, 1.0)
+            finallImageData = UIImageJPEGRepresentation(newImage!, 1.0)
             //从前半部分开始
             for idx in 0..<125 {
                 let value = compressionQualityArr[idx]
-                let sizeOrigin   = Int64((finallImageData?.length)!)
+                let sizeOrigin   = Int64((finallImageData?.count)!)
                 let sizeOriginKB = Int(sizeOrigin / 1024)
                 print("前半部分当前降到的质量：\(sizeOriginKB)")
                 if sizeOriginKB > maxSize {
                     print("\(idx)----\(value)")
-                    finallImageData = UIImageJPEGRepresentation(newImage, CGFloat(value as! NSNumber))
+                    finallImageData = UIImageJPEGRepresentation(newImage!, CGFloat(value as! NSNumber))
                 } else {
                     break
                 }
             }
         }
-        return finallImageData!
+        return finallImageData! as NSData
     }
     
     override func didReceiveMemoryWarning() {
