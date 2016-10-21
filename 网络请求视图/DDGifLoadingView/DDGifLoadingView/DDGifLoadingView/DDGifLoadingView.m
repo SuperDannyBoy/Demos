@@ -5,15 +5,12 @@
 //  Created by SuperDanny on 16/4/1.
 //  Copyright © 2016年 SuperDanny. All rights reserved.
 
-// 版权属于原作者
-// http://code4app.com (cn) http://code4app.net (en)
-// 发布代码于最专业的源码分享网站: Code4App.com
-
 #import "DDGifLoadingView.h"
 #import "AppDelegate.h"
 #import <ImageIO/ImageIO.h>
 
 #define Size            150
+#define kImageSize      100
 #define FadeDuration    0.3
 #define GifSpeed        1.5
 
@@ -143,6 +140,7 @@ static UIImage *animatedImageWithAnimatedGIFReleasingImageSource(CGImageSourceRe
 @property (nonatomic, strong) UIView      *overlayView;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, assign) BOOL        shown;
+@property (nonatomic, copy) void(^TapDismiss_Block)();
 
 @end
 
@@ -161,19 +159,18 @@ static DDGifLoadingView *instance;
     if ((self = [super initWithFrame:CGRectMake(0, 0, Size, Size)])) {
         
         [self setUserInteractionEnabled:YES];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@
-                                       selector(dismiss)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
         [self addGestureRecognizer:tap];
         
         [self setAlpha:0];
         [self setCenter:APPDELEGATE.window.center];
         [self setClipsToBounds:NO];
         
-        [self.layer setBackgroundColor:[[UIColor colorWithWhite:0 alpha:0.5] CGColor]];
+//        [self.layer setBackgroundColor:[[UIColor colorWithWhite:0 alpha:0.5] CGColor]];
         [self.layer setCornerRadius:10];
         [self.layer setMasksToBounds:YES];
         
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectInset(self.bounds, 20, 20)];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.bounds.size.width/2 - kImageSize/2, self.bounds.size.height/2 - kImageSize/2, kImageSize, kImageSize)];
         [self addSubview:self.imageView];
         
         [APPDELEGATE.window addSubview:self];
@@ -185,7 +182,7 @@ static DDGifLoadingView *instance;
 
 + (void)showWithOverlay {
     [self dismiss:^{
-        [APPDELEGATE.window addSubview:[[self instance] overlay]];
+        [APPDELEGATE.window addSubview:[[self instance] _overlay]];
         [self show];
     }];
 }
@@ -202,7 +199,7 @@ static DDGifLoadingView *instance;
     if (![[self instance] shown])
         return;
     
-    [[[self instance] overlay] removeFromSuperview];
+    [[[self instance] _overlay] removeFromSuperview];
     [[self instance] fadeOut];
 }
 
@@ -211,13 +208,20 @@ static DDGifLoadingView *instance;
         return complated ();
     
     [[self instance] fadeOutComplate:^{
-        [[[self instance] overlay] removeFromSuperview];
+        [[[self instance] _overlay] removeFromSuperview];
         complated ();
     }];
 }
 
++ (void)setTapDismissBlock:(void(^)())block {
+    [DDGifLoadingView instance].TapDismiss_Block = block;
+}
+
 - (void)dismiss {
     [DDGifLoadingView dismiss];
+    if ([DDGifLoadingView instance].TapDismiss_Block) {
+        [DDGifLoadingView instance].TapDismiss_Block();
+    }
 }
 
 #pragma mark Effects
@@ -249,7 +253,7 @@ static DDGifLoadingView *instance;
 }
 
 
-- (UIView *)overlay {
+- (UIView *)_overlay {
     if (!self.overlayView) {
         self.overlayView = [[UIView alloc] initWithFrame:APPDELEGATE.window.frame];
         [self.overlayView setBackgroundColor:[UIColor blackColor]];
