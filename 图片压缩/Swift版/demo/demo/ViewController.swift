@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate {
-
+    
     var lowImg: UIImageView!
     
     override func viewDidLoad() {
@@ -145,12 +145,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate {
         }
         return finallImageData!
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
-

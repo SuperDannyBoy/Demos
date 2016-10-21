@@ -63,6 +63,15 @@
 }
 
 - (NSData *)resetSizeOfImageData:(UIImage *)source_image maxSize:(NSInteger)maxSize {
+    //先判断当前质量是否满足要求，不满足再进行压缩
+    __block NSData *finallImageData = UIImageJPEGRepresentation(source_image,1.0);
+    NSUInteger sizeOrigin   = finallImageData.length;
+    NSUInteger sizeOriginKB = sizeOrigin / 1024;
+    
+    if (sizeOriginKB <= maxSize) {
+        return finallImageData;
+    }
+    
     //先调整分辨率
     CGSize newSize = CGSizeMake(source_image.size.width, source_image.size.height);
     
@@ -81,14 +90,7 @@
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    //先判断当前质量是否满足要求，不满足再进行压缩
-    __block NSData *finallImageData = UIImageJPEGRepresentation(newImage,1.0);
-    NSUInteger sizeOrigin   = finallImageData.length;
-    NSUInteger sizeOriginKB = sizeOrigin / 1024;
-    
-    if (sizeOriginKB <= maxSize) {
-        return finallImageData;
-    }
+    finallImageData = UIImageJPEGRepresentation(newImage,1.0);
     
     //保存压缩系数
     NSMutableArray *compressionQualityArr = [NSMutableArray array];
@@ -102,10 +104,6 @@
     //说明：压缩系数数组compressionQualityArr是从大到小存储。
     //思路：折半计算，如果中间压缩系数仍然降不到目标值maxSize，则从后半部分开始寻找压缩系数；反之从前半部分寻找压缩系数
     if (UIImageJPEGRepresentation(newImage,[compressionQualityArr[125] floatValue]).length/1024 > maxSize) {
-        
-        //拿到最初的大小
-        finallImageData = UIImageJPEGRepresentation(newImage, 1.0);
-        
         //从后半部分开始
         for (int idx = 126; idx < 250; idx++) {
             NSUInteger sizeOrigin = finallImageData.length;
@@ -119,10 +117,6 @@
             }
         }
     } else {
-        
-        //拿到最初的大小
-        finallImageData = UIImageJPEGRepresentation(newImage, 1.0);
-        
         //从前半部分开始
         for (int idx = 0; idx < 125; idx++) {
             NSUInteger sizeOrigin = finallImageData.length;
@@ -137,17 +131,6 @@
         }
     }
     
-//    [compressionQualityArr enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        NSUInteger sizeOrigin = finallImageData.length;
-//        NSUInteger sizeOriginKB = sizeOrigin / 1024;
-//        NSLog(@"当前降到的质量：%ld", (unsigned long)sizeOriginKB);
-//        if (sizeOriginKB > maxSize) {
-//            NSLog(@"%ld----%lf", (unsigned long)idx, [obj floatValue]);
-//            finallImageData = UIImageJPEGRepresentation(newImage,[obj floatValue]);
-//        } else {
-//            *stop = YES;
-//        }
-//    }];
     return finallImageData;
 }
 
