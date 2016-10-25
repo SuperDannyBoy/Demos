@@ -19,6 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIScrollView *scrol = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:scrol];
+    
     //降质量图片
     NSData *da = [self resetSizeOfImageData:[UIImage imageNamed:@"IMG_0509.jpg"] maxSize:30];
     NSByteCountFormatter *f = [[NSByteCountFormatter alloc] init];
@@ -30,20 +33,30 @@
     _lowImg = [[UIImageView alloc] initWithImage:ima];
     _lowImg.frame = CGRectMake(0, 0, 240, 320);
     
-    [self.view addSubview:_lowImg];
+    [scrol addSubview:_lowImg];
+    
+    UILabel *labLow = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_lowImg.frame)+10, CGRectGetWidth(_lowImg.frame), 20)];
+    labLow.text = [NSString stringWithFormat:@"压缩之后大小：%@", [f stringFromByteCount:da.length]];
+    [scrol addSubview:labLow];
     
     //原图片
     UIImageView *imgSource = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"IMG_0509.jpg"]];
-    imgSource.frame = CGRectMake(0, 330, 240, 320);
+    imgSource.frame = CGRectMake(0, CGRectGetMaxY(labLow.frame)+20, 240, 320);
     
-    [self.view addSubview:imgSource];
+    [scrol addSubview:imgSource];
+    
+    UILabel *labSource = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(imgSource.frame)+10, CGRectGetWidth(imgSource.frame), 20)];
+    labSource.text = [NSString stringWithFormat:@"原图大小：%@", [f stringFromByteCount:UIImagePNGRepresentation([UIImage imageNamed:@"IMG_0509.jpg"]).length]];
+    [scrol addSubview:labSource];
     
     //图片增加保存本地功能
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_lowImg.frame)+10, 100, 120, 40)];
     [btn addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
     [btn setTitle:@"保存压缩图片" forState:UIControlStateNormal];
     btn.backgroundColor = [UIColor orangeColor];
-    [self.view addSubview:btn];
+    [scrol addSubview:btn];
+    
+    scrol.contentSize = CGSizeMake(CGRectGetMaxX(btn.frame)+10, CGRectGetMaxY(labSource.frame)+10);
 }
 
 - (void)save {
@@ -54,7 +67,12 @@
 
 //保存图片后到相册后，调用的相关方法，查看是否保存成功
 - (void)imageWasSavedSuccessfully:(UIImage *)paramImage didFinishSavingWithError:(NSError *)paramError contextInfo:(void *)paramContextInfo{
-    if (paramError == nil){
+    if (paramError == nil) {
+        [[[UIAlertView alloc] initWithTitle:@"提示"
+                                    message:@"保存成功"
+                                   delegate:nil
+                          cancelButtonTitle:@"确定"
+                          otherButtonTitles:nil, nil] show];
         NSLog(@"Image was saved successfully.");
     } else {
         NSLog(@"An error happened while saving the image.");
@@ -73,10 +91,46 @@
     }
     
     //先调整分辨率
+    CGSize defaultSize = CGSizeMake(1024, 1024);
+    UIImage *newImage = [self newSizeImage:defaultSize image:source_image];
+    
+    finallImageData = UIImageJPEGRepresentation(newImage,1.0);
+    
+    //保存压缩系数
+    NSMutableArray *compressionQualityArr = [NSMutableArray array];
+    CGFloat avg   = 1.0/250;
+    CGFloat value = avg;
+    for (int i = 250; i >= 1; i--) {
+        value = i*avg;
+        [compressionQualityArr addObject:@(value)];
+    }
+    
+    /*
+     调整大小
+     说明：压缩系数数组compressionQualityArr是从大到小存储。
+     */
+    //思路：使用二分法搜索
+    finallImageData = [self halfFuntion:compressionQualityArr image:newImage sourceData:finallImageData maxSize:maxSize];
+    //如果还是未能压缩到指定大小，则进行降分辨率
+    while (finallImageData.length == 0) {
+        //每次降100分辨率
+        if (defaultSize.width-100 <= 0 || defaultSize.height-100 <= 0) {
+            break;
+        }
+        defaultSize = CGSizeMake(defaultSize.width-100, defaultSize.height-100);
+        UIImage *image = [self newSizeImage:defaultSize
+                                      image:[UIImage imageWithData:UIImageJPEGRepresentation(newImage,[[compressionQualityArr lastObject] floatValue])]];
+        finallImageData = [self halfFuntion:compressionQualityArr image:image sourceData:UIImageJPEGRepresentation(image,1.0) maxSize:maxSize];
+    }
+    return finallImageData;
+}
+
+#pragma mark 调整图片分辨率/尺寸（等比例缩放）
+- (UIImage *)newSizeImage:(CGSize)size image:(UIImage *)source_image {
     CGSize newSize = CGSizeMake(source_image.size.width, source_image.size.height);
     
-    CGFloat tempHeight = newSize.height / 1024;
-    CGFloat tempWidth = newSize.width / 1024;
+    CGFloat tempHeight = newSize.height / size.height;
+    CGFloat tempWidth = newSize.width / size.width;
     
     if (tempWidth > 1.0 && tempWidth > tempHeight) {
         newSize = CGSizeMake(source_image.size.width / tempWidth, source_image.size.height / tempWidth);
@@ -89,49 +143,40 @@
     [source_image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    return newImage;
+}
+
+#pragma mark 二分法
+- (NSData *)halfFuntion:(NSArray *)arr image:(UIImage *)image sourceData:(NSData *)finallImageData maxSize:(NSInteger)maxSize {
+    NSData *tempData = [NSData data];
+    NSUInteger start = 0;
+    NSUInteger end = arr.count - 1;
+    NSUInteger index = 0;
     
-    finallImageData = UIImageJPEGRepresentation(newImage,1.0);
-    
-    //保存压缩系数
-    NSMutableArray *compressionQualityArr = [NSMutableArray array];
-    CGFloat avg   = 1.0/250;
-    CGFloat value = avg;
-    for (int i = 250; i >= 1; i--) {
-        value = i*avg;
-        [compressionQualityArr addObject:@(value)];
-    }
-    //调整大小
-    //说明：压缩系数数组compressionQualityArr是从大到小存储。
-    //思路：折半计算，如果中间压缩系数仍然降不到目标值maxSize，则从后半部分开始寻找压缩系数；反之从前半部分寻找压缩系数
-    if (UIImageJPEGRepresentation(newImage,[compressionQualityArr[125] floatValue]).length/1024 > maxSize) {
-        //从后半部分开始
-        for (int idx = 126; idx < 250; idx++) {
-            NSUInteger sizeOrigin = finallImageData.length;
-            NSUInteger sizeOriginKB = sizeOrigin / 1024;
-            NSLog(@"当前降到的质量：%ld", (unsigned long)sizeOriginKB);
-            if (sizeOriginKB > maxSize) {
-                NSLog(@"%d----%lf", idx, [compressionQualityArr[idx] floatValue]);
-                finallImageData = UIImageJPEGRepresentation(newImage,[compressionQualityArr[idx] floatValue]);
-            } else {
-                break;
+    NSUInteger difference = NSIntegerMax;
+    while(start <= end) {
+        index = start + (end - start)/2;
+        
+        finallImageData = UIImageJPEGRepresentation(image,[arr[index] floatValue]);
+        
+        NSUInteger sizeOrigin = finallImageData.length;
+        NSUInteger sizeOriginKB = sizeOrigin / 1024;
+        NSLog(@"当前降到的质量：%ld", (unsigned long)sizeOriginKB);
+        NSLog(@"%lu----%lf", (unsigned long)index, [arr[index] floatValue]);
+        
+        if (sizeOriginKB > maxSize) {
+            start = index + 1;
+        } else if (sizeOriginKB < maxSize) {
+            if (maxSize-sizeOriginKB < difference) {
+                difference = maxSize-sizeOriginKB;
+                tempData = finallImageData;
             }
-        }
-    } else {
-        //从前半部分开始
-        for (int idx = 0; idx < 125; idx++) {
-            NSUInteger sizeOrigin = finallImageData.length;
-            NSUInteger sizeOriginKB = sizeOrigin / 1024;
-            NSLog(@"当前降到的质量：%ld", (unsigned long)sizeOriginKB);
-            if (sizeOriginKB > maxSize) {
-                NSLog(@"%d----%lf", idx, [compressionQualityArr[idx] floatValue]);
-                finallImageData = UIImageJPEGRepresentation(newImage,[compressionQualityArr[idx] floatValue]);
-            } else {
-                break;
-            }
+            end = index - 1;
+        } else {
+            break;
         }
     }
-    
-    return finallImageData;
+    return tempData;
 }
 
 #pragma mark -
