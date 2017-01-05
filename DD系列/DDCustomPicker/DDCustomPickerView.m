@@ -10,7 +10,9 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#define kDuration 0.3
+#define kDuration   0.3
+#define kRowHeight  44.f
+#define kSingleLineColor [UIColor colorWithRed:239/255. green:240/255. blue:241/255. alpha:1]
 
 @interface DDCustomPickerView ()
 
@@ -18,9 +20,9 @@
 @property (copy, nonatomic) void(^Choose_Block)();
 @property (copy, nonatomic) NSString *(^TitleForRow_Block)(NSInteger, NSInteger);
 @property (copy, nonatomic) NSUInteger(^NumberOfRows_Block)(NSInteger);
+///列数
 @property (assign, nonatomic) DDPickerStyle pickerStyle;
 @property (strong, nonatomic) UIView *bgView;
-
 
 @end
 
@@ -30,6 +32,7 @@
     
     self = [[[NSBundle mainBundle] loadNibNamed:@"DDCustomPickerView" owner:self options:nil] objectAtIndex:0];
     if (self) {
+        self.pickerView.frame = CGRectMake(0, 40, [UIScreen mainScreen].bounds.size.width, CGRectGetHeight(self.frame)-40);
         self.pickerStyle = pickerStyle;
     }
     
@@ -100,25 +103,32 @@
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     
+    //设置分割线的颜色
+    for (UIView *singleLine in pickerView.subviews) {
+        if (singleLine.frame.size.height < 1) {
+            singleLine.backgroundColor = kSingleLineColor;
+        }
+    }
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    
     UILabel *myView = [[UILabel alloc] init];
     myView.textAlignment = NSTextAlignmentCenter;
     myView.text = _TitleForRow_Block(row, component);
     
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    
     switch (_pickerStyle) {
         case DDPickerStyle_1: {
-            myView.frame = CGRectMake(0.0, 0.0, width, 35);
-            myView.font = [UIFont systemFontOfSize:16];//用label来设置字体大小
+            myView.frame = CGRectMake(0.0, 0.0, width, kRowHeight);
+            myView.font = [UIFont systemFontOfSize:20];//用label来设置字体大小
             break;
         }
         case DDPickerStyle_2: {
-            myView.frame = CGRectMake(0.0, 0.0, width/2.0, 35);
+            myView.frame = CGRectMake(0.0, 0.0, width/2.0, kRowHeight);
             myView.font = [UIFont systemFontOfSize:16];//用label来设置字体大小
             break;
         }
         case DDPickerStyle_3: {
-            myView.frame = CGRectMake(0.0, 0.0, width/3.0, 35);
+            myView.frame = CGRectMake(0.0, 0.0, width/3.0, kRowHeight);
             myView.font = [UIFont systemFontOfSize:14];//用label来设置字体大小
             break;
         }
@@ -134,6 +144,10 @@
     if (_Select_Block) {
         _Select_Block(row, component);
     }
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    return kRowHeight;
 }
 
 - (IBAction)choose {
