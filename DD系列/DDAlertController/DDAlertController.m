@@ -1,9 +1,8 @@
 //
 //  DDAlertController.m
-//  NightclubLive
 //
 //  Created by SuperDanny on 2017/1/5.
-//  Copyright © 2017年 李善忠. All rights reserved.
+//  Copyright © 2017年 SuperDanny ( http://SuperDanny.link/ ). All rights reserved.
 //
 
 #import "DDAlertController.h"
