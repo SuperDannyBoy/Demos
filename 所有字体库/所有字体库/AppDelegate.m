@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "TableViewController.h"
+#import "RootViewController.h"
 
 @interface AppDelegate ()
 
@@ -18,8 +19,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    TableViewController *root = [[TableViewController alloc] init];
-    self.window.rootViewController = root;
+    RootViewController *root = [[RootViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:root];
+    self.window.rootViewController = nav;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

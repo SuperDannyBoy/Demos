@@ -12,7 +12,7 @@
 		1E4A8C4A1AB96226001D37BA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E4A8C491AB96226001D37BA /* Images.xcassets */; };
 		1E4A8C4D1AB96226001D37BA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E4A8C4B1AB96226001D37BA /* LaunchScreen.xib */; };
 		1E4A8C591AB96226001D37BA /* _____Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A8C581AB96226001D37BA /* _____Tests.m */; };
-		1E4A8C661AB96A07001D37BA /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4A8C651AB96A07001D37BA /* TableViewController.m */; };
+		DF544B521E8E1EE00079D2D0 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF544B511E8E1EE00079D2D0 /* RootViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,8 +36,8 @@
 		1E4A8C521AB96226001D37BA /* 所有字体库Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "所有字体库Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E4A8C571AB96226001D37BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E4A8C581AB96226001D37BA /* _____Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "_____Tests.m"; sourceTree = "<group>"; };
-		1E4A8C641AB96A07001D37BA /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
-		1E4A8C651AB96A07001D37BA /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		DF544B501E8E1EE00079D2D0 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		DF544B511E8E1EE00079D2D0 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,8 +81,8 @@
 			children = (
 				1E4A8C401AB96226001D37BA /* AppDelegate.h */,
 				1E4A8C411AB96226001D37BA /* AppDelegate.m */,
-				1E4A8C641AB96A07001D37BA /* TableViewController.h */,
-				1E4A8C651AB96A07001D37BA /* TableViewController.m */,
+				DF544B501E8E1EE00079D2D0 /* RootViewController.h */,
+				DF544B511E8E1EE00079D2D0 /* RootViewController.m */,
 				1E4A8C491AB96226001D37BA /* Images.xcassets */,
 				1E4A8C4B1AB96226001D37BA /* LaunchScreen.xib */,
 				1E4A8C3C1AB96226001D37BA /* Supporting Files */,
@@ -165,6 +165,7 @@
 				TargetAttributes = {
 					1E4A8C381AB96226001D37BA = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = BQ47E63DF2;
 					};
 					1E4A8C511AB96226001D37BA = {
 						CreatedOnToolsVersion = 6.1;
@@ -217,7 +218,7 @@
 			files = (
 				1E4A8C421AB96226001D37BA /* AppDelegate.m in Sources */,
 				1E4A8C3F1AB96226001D37BA /* main.m in Sources */,
-				1E4A8C661AB96A07001D37BA /* TableViewController.m in Sources */,
+				DF544B521E8E1EE00079D2D0 /* RootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,11 +332,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Zhijie Wang (279X77QYCE)";
+				DEVELOPMENT_TEAM = BQ47E63DF2;
 				INFOPLIST_FILE = "所有字体库/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7454e855-33d4-4b8a-b245-f351d713d02e";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Wildcard Development";
 			};
 			name = Debug;
 		};
@@ -348,7 +351,7 @@
 				INFOPLIST_FILE = "所有字体库/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7454e855-33d4-4b8a-b245-f351d713d02e";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
