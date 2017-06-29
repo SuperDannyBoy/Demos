@@ -15,18 +15,11 @@
 @property (copy, nonatomic) NSString *(^Title_Block)(NSUInteger index);
 @property (copy, nonatomic) NSInteger(^Row_Block)();
 @property (assign, nonatomic) NSUInteger viewHeight;
+@property (strong, nonatomic) UIView *bgView;
 
 @end
 
 @implementation DDDropDownMenu
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -42,6 +35,9 @@
     self.layer.borderWidth = 0.5;
     self.layer.borderColor = [UIColor colorWithWhite:0.651 alpha:1.000].CGColor;
     [self addSubview:self.tableView];
+    _bgView = [[UIView alloc] initWithFrame:kAppWindow.bounds];
+    _bgView.backgroundColor = [UIColor clearColor];
+    [_bgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
 }
 
 - (void)setRowBlock:(NSInteger (^)())block {
@@ -73,7 +69,9 @@
     CGRect rect = self.frame;
     rect.size.height = 0;
     self.frame = rect;
-    [view addSubview:weakSelf];
+    _bgView.hidden = NO;
+    [view addSubview:self];
+    [view insertSubview:_bgView belowSubview:self];
     [UIView animateWithDuration:0.3 animations:^{
         CGRect rect = weakSelf.frame;
         rect.size.height = weakSelf.viewHeight;
@@ -93,7 +91,7 @@
         rect.size.height = 0;
         weakSelf.frame = rect;
     } completion:^(BOOL finished) {
-        
+        weakSelf.bgView.hidden = YES;
     }];
 }
 
@@ -108,6 +106,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     cell.textLabel.font = [UIFont systemFontOfSize:15];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
     if (self.Title_Block) {
         cell.textLabel.text = self.Title_Block(indexPath.row);
     }
@@ -121,6 +120,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.Select_Block) {
         self.Select_Block(indexPath.row);
     }

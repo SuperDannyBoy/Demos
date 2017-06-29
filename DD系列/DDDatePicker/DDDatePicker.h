@@ -10,6 +10,9 @@
 
 @interface DDDatePicker : UIView
 
+///比较两个日期大小
++ (BOOL)compareDateA:(NSDate *)dateA isBiggerThanDateB:(NSDate *)dateB;
+
 - (instancetype)initWithDateMode:(UIDatePickerMode)mode;
 ///设置显示日期
 - (void)setDate:(NSDate *)date;

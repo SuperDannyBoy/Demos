@@ -29,6 +29,14 @@
     return self;
 }
 
+#pragma mark - 比较两个日期大小
++ (BOOL)compareDateA:(NSDate *)dateA isBiggerThanDateB:(NSDate *)dateB {
+    if ([dateA compare:dateB] == NSOrderedAscending) {
+        return NO;
+    }
+    return YES;
+}
+
 #pragma mark - 设置显示日期
 - (void)setDate:(NSDate *)date {
     _showDate = date;
@@ -60,7 +68,7 @@
 
 - (IBAction)chooseDate {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    //    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSString *str = [formatter stringFromDate:_selectDate];
     if (_Choose_DateBlock) {
