@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:DDCustomKeyboard.xcodeproj">
+      location = "self:ApplePayTest.xcodeproj">
    </FileRef>
 </Workspace>

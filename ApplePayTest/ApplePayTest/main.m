@@ -1,9 +1,9 @@
 //
 //  main.m
-//  DDCustomKeyboard
+//  ApplePayTest
 //
-//  Created by SuperDanny on 2017/6/28.
-//  Copyright © 2017年 MacauIT. All rights reserved.
+//  Created by SuperDanny on 16/2/20.
+//  Copyright © 2016年 SuperDanny. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
