@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:DDGifLoadingView.xcodeproj">
+      location = "self:DDAuthorizationManager.xcodeproj">
    </FileRef>
 </Workspace>

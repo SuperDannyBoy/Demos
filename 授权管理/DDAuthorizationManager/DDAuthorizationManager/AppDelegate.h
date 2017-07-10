@@ -1,9 +1,9 @@
 //
 //  AppDelegate.h
-//  DDGifLoadingView
+//  DDAuthorizationManager
 //
-//  Created by SuperDanny on 15/11/14.
-//  Copyright © 2015年 SuperDanny. All rights reserved.
+//  Created by SuperDanny on 16/3/11.
+//  Copyright © 2016年 SuperDanny. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
